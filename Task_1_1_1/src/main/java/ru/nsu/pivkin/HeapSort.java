@@ -1,6 +1,16 @@
 package ru.nsu.pivkin;
 
-public class Sample {
+/**
+ * Класс для сортировки массива методом пирамидальной сортировки (Heap Sort).
+ * Работает в худшем, среднем и лучшем случае за O(n log n).
+ */
+public class HeapSort {
+    /**
+     * Функция преобразования в двоичную кучу max-heap поддерева с корнем в заданном индексе.
+     * @param input массив, представляющий кучу
+     * @param n размер кучи
+     * @param i индекс корня поддерева
+     */
     private static void heapify(int[] input, int n, int i) {
         int largest = i;
 
@@ -24,6 +34,13 @@ public class Sample {
         }
     }
 
+    /**
+     * Сортировка массива методом пирамидальной сортировки.
+     * Этапы:
+     * 1. Построение двоичной кучи max-heap из исходного массива;
+     * 2. Последовательное извлечение максимальных элементов с восстановлением свойств на меньшей куче.
+     * @param input массив для сортировки (результат сохраняется тут же)
+     */
     public static void heapSort(int[] input) {
         int n = input.length;
 
@@ -40,7 +57,10 @@ public class Sample {
         }
     }
 
-
+    /**
+     * Демонстрационный вариант работы алгоритма.
+     * @param args аргументы командной строки (не используются)
+     */
     public static void main(String[] args) {
         int arr[] = {12, 11, 13, 5, 6, 7};
         int n = arr.length;
@@ -51,7 +71,7 @@ public class Sample {
         }
         System.out.println();
 
-        Sample ob = new Sample();
+        HeapSort ob = new HeapSort();
         ob.heapSort(arr);
 
         System.out.print("Sorted array: ");
