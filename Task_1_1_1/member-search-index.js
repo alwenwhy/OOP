@@ -1,1 +1,1 @@
-memberSearchIndex = [{"p":"ru.nsu.pivkin","c":"Sample","l":"main(String[])","u":"main(java.lang.String[])"},{"p":"ru.nsu.pivkin","c":"Sample","l":"printHelloWorld()"},{"p":"ru.nsu.pivkin","c":"Sample","l":"Sample()","u":"%3Cinit%3E()"}];updateSearchResults();
+memberSearchIndex = [{"p":"ru.nsu.pivkin","c":"Sample","l":"heapSort(int[])"},{"p":"ru.nsu.pivkin","c":"Sample","l":"main(String[])","u":"main(java.lang.String[])"},{"p":"ru.nsu.pivkin","c":"Sample","l":"Sample()","u":"%3Cinit%3E()"}];updateSearchResults();
