@@ -68,7 +68,7 @@ class HeapSortTest {
 
     @Test
     void checkMain() {
-        HeapSort.main(new String[] {});
+        Program.main(new String[] {});
         assertTrue(true);
     }
 }
