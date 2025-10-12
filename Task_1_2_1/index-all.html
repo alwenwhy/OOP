@@ -70,6 +70,11 @@ loadScripts(document, 'script');</script>
 </dl>
 <h2 class="title" id="I:D">D</h2>
 <dl class="index">
+<dt><a href="ru/nsu/pivkin/Game.html#dealerTurn(ru.nsu.pivkin.Player,ru.nsu.pivkin.Player,ru.nsu.pivkin.Deck)" class="member-name-link">dealerTurn(Player, Player, Deck)</a> - Static method in class ru.nsu.pivkin.<a href="ru/nsu/pivkin/Game.html" title="class in ru.nsu.pivkin">Game</a></dt>
+<dd>
+<div class="block">По сути то же самое что и userTurn(), но дилер добирает
+ карты до момента, пока его очки меньше 17.</div>
+</dd>
 <dt><a href="ru/nsu/pivkin/Deck.html" class="type-name-link" title="class in ru.nsu.pivkin">Deck</a> - Class in <a href="ru/nsu/pivkin/package-summary.html">ru.nsu.pivkin</a></dt>
 <dd>
 <div class="block">Класс Deck для абстракции колоды с 52-мя игральными картами.</div>
@@ -127,9 +132,9 @@ loadScripts(document, 'script');</script>
 <div class="block">Посмотреть все карты на руке в виде:
  "[Первая Карта (Х), Вторая Карта (Y)...] => X + Y..."</div>
 </dd>
-<dt><a href="ru/nsu/pivkin/Deck.html#showDeck()" class="member-name-link">showDeck()</a> - Method in class ru.nsu.pivkin.<a href="ru/nsu/pivkin/Deck.html" title="class in ru.nsu.pivkin">Deck</a></dt>
+<dt><a href="ru/nsu/pivkin/Game.html#showPoints(ru.nsu.pivkin.Player,ru.nsu.pivkin.Player)" class="member-name-link">showPoints(Player, Player)</a> - Static method in class ru.nsu.pivkin.<a href="ru/nsu/pivkin/Game.html" title="class in ru.nsu.pivkin">Game</a></dt>
 <dd>
-<div class="block">Метод для просмотра всех карт в формате XYY.</div>
+<div class="block">Метод для вывода счёта по всем прошедшим раундам.</div>
 </dd>
 </dl>
 <h2 class="title" id="I:U">U</h2>
@@ -142,6 +147,10 @@ loadScripts(document, 'script');</script>
 <dt><a href="ru/nsu/pivkin/Player.html#updatePlayer()" class="member-name-link">updatePlayer()</a> - Method in class ru.nsu.pivkin.<a href="ru/nsu/pivkin/Player.html" title="class in ru.nsu.pivkin">Player</a></dt>
 <dd>
 <div class="block">Метод для обновления объекта после сыгранного раунда.</div>
+</dd>
+<dt><a href="ru/nsu/pivkin/Game.html#userTurn(ru.nsu.pivkin.Player,ru.nsu.pivkin.Player,ru.nsu.pivkin.Deck)" class="member-name-link">userTurn(Player, Player, Deck)</a> - Static method in class ru.nsu.pivkin.<a href="ru/nsu/pivkin/Game.html" title="class in ru.nsu.pivkin">Game</a></dt>
+<dd>
+<div class="block">Считывание ввода и логика подсчёта очков.</div>
 </dd>
 </dl>
 <h2 class="title" id="I:W">W</h2>

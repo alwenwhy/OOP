@@ -115,13 +115,8 @@ loadScripts(document, 'script');</script>
 <div class="block">Возвращает карту, на которой сейчас указатель.</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#showDeck()" class="member-name-link">showDeck</a>()</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#updateDeck()" class="member-name-link">updateDeck</a>()</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Метод для просмотра всех карт в формате XYY.</div>
-</div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#updateDeck()" class="member-name-link">updateDeck</a>()</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Колода "обновляется":
  1.</div>
 </div>
@@ -168,13 +163,6 @@ loadScripts(document, 'script');</script>
 </section>
 </li>
 <li>
-<section class="detail" id="showDeck()">
-<h3>showDeck</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">showDeck</span>()</div>
-<div class="block">Метод для просмотра всех карт в формате XYY.</div>
-</section>
-</li>
-<li>
 <section class="detail" id="pickCard()">
 <h3>pickCard</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">int</span>&nbsp;<span class="element-name">pickCard</span>()</div>
@@ -183,7 +171,8 @@ loadScripts(document, 'script');</script>
  новую карту на верхушке колоды.</div>
 <dl class="notes">
 <dt>Returns:</dt>
-<dd>- карта формата XYY.</dd>
+<dd>- карта формата XYY или -1,
+          если колода закончилась.</dd>
 </dl>
 </section>
 </li>

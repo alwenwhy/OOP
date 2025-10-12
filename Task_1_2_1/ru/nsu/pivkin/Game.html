@@ -106,8 +106,29 @@ loadScripts(document, 'script');</script>
 <div class="table-header col-second">Method</div>
 <div class="table-header col-last">Description</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static void</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#main(java.lang.String%5B%5D)" class="member-name-link">main</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>[]&nbsp;args)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">&nbsp;</div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#dealerTurn(ru.nsu.pivkin.Player,ru.nsu.pivkin.Player,ru.nsu.pivkin.Deck)" class="member-name-link">dealerTurn</a><wbr>(<a href="Player.html" title="class in ru.nsu.pivkin">Player</a>&nbsp;user,
+ <a href="Player.html" title="class in ru.nsu.pivkin">Player</a>&nbsp;dealer,
+ <a href="Deck.html" title="class in ru.nsu.pivkin">Deck</a>&nbsp;deck)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
+<div class="block">По сути то же самое что и userTurn(), но дилер добирает
+ карты до момента, пока его очки меньше 17.</div>
+</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static void</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#main(java.lang.String%5B%5D)" class="member-name-link">main</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>[]&nbsp;args)</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">&nbsp;</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static void</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#showPoints(ru.nsu.pivkin.Player,ru.nsu.pivkin.Player)" class="member-name-link">showPoints</a><wbr>(<a href="Player.html" title="class in ru.nsu.pivkin">Player</a>&nbsp;user,
+ <a href="Player.html" title="class in ru.nsu.pivkin">Player</a>&nbsp;dealer)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
+<div class="block">Метод для вывода счёта по всем прошедшим раундам.</div>
+</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static void</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#userTurn(ru.nsu.pivkin.Player,ru.nsu.pivkin.Player,ru.nsu.pivkin.Deck)" class="member-name-link">userTurn</a><wbr>(<a href="Player.html" title="class in ru.nsu.pivkin">Player</a>&nbsp;user,
+ <a href="Player.html" title="class in ru.nsu.pivkin">Player</a>&nbsp;dealer,
+ <a href="Deck.html" title="class in ru.nsu.pivkin">Deck</a>&nbsp;deck)</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
+<div class="block">Считывание ввода и логика подсчёта очков.</div>
+</div>
 </div>
 </div>
 </div>
@@ -143,6 +164,53 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="main(java.lang.String[])">
 <h3>main</h3>
 <div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">main</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>[]&nbsp;args)</span></div>
+</section>
+</li>
+<li>
+<section class="detail" id="userTurn(ru.nsu.pivkin.Player,ru.nsu.pivkin.Player,ru.nsu.pivkin.Deck)">
+<h3>userTurn</h3>
+<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">userTurn</span><wbr><span class="parameters">(<a href="Player.html" title="class in ru.nsu.pivkin">Player</a>&nbsp;user,
+ <a href="Player.html" title="class in ru.nsu.pivkin">Player</a>&nbsp;dealer,
+ <a href="Deck.html" title="class in ru.nsu.pivkin">Deck</a>&nbsp;deck)</span></div>
+<div class="block">Считывание ввода и логика подсчёта очков.
+ Здесь пользователь решает брать или не брать карту.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>user</code> - - объект класса Player, пользователь.</dd>
+<dd><code>dealer</code> - - объект класса Player, дилер.</dd>
+<dd><code>deck</code> - - объект класса Deck, колода в раунде.</dd>
+</dl>
+</section>
+</li>
+<li>
+<section class="detail" id="dealerTurn(ru.nsu.pivkin.Player,ru.nsu.pivkin.Player,ru.nsu.pivkin.Deck)">
+<h3>dealerTurn</h3>
+<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">dealerTurn</span><wbr><span class="parameters">(<a href="Player.html" title="class in ru.nsu.pivkin">Player</a>&nbsp;user,
+ <a href="Player.html" title="class in ru.nsu.pivkin">Player</a>&nbsp;dealer,
+ <a href="Deck.html" title="class in ru.nsu.pivkin">Deck</a>&nbsp;deck)</span></div>
+<div class="block">По сути то же самое что и userTurn(), но дилер добирает
+ карты до момента, пока его очки меньше 17.
+ Метод не используется, если у игрока блекджек или перебор.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>user</code> - - объект класса Player, пользователь.</dd>
+<dd><code>dealer</code> - - объект класса Player, дилер.</dd>
+<dd><code>deck</code> - - объект класса Deck, колода в раунде.</dd>
+</dl>
+</section>
+</li>
+<li>
+<section class="detail" id="showPoints(ru.nsu.pivkin.Player,ru.nsu.pivkin.Player)">
+<h3>showPoints</h3>
+<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">showPoints</span><wbr><span class="parameters">(<a href="Player.html" title="class in ru.nsu.pivkin">Player</a>&nbsp;user,
+ <a href="Player.html" title="class in ru.nsu.pivkin">Player</a>&nbsp;dealer)</span></div>
+<div class="block">Метод для вывода счёта по всем прошедшим раундам.
+ Формат "X:Y" со строковым дополнением в чью пользу.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>user</code> - - объект класса Player, пользователь.</dd>
+<dd><code>dealer</code> - - объект класса Player, дилер.</dd>
+</dl>
 </section>
 </li>
 </ul>
