@@ -1,5 +1,6 @@
 package ru.nsu.pivkin;
 import java.util.Random;
+import java.util.Arrays;
 
 /**
  * Класс Deck для абстракции колоды с 52-мя игральными картами.
@@ -35,22 +36,15 @@ public class Deck {
     }
 
     /**
-     * Метод для просмотра всех карт в формате XYY.
-     */
-    public void showDeck() {
-        for (int i = 0; i < DECK_SIZE; i++)
-            System.out.println(cards[i]);
-    }
-
-    /**
      * Возвращает карту, на которой сейчас указатель.
      * Указатель увеличивается, тем самым симулируя
      * новую карту на верхушке колоды.
      *
-     * @return - карта формата XYY.
+     * @return - карта формата XYY или -1,
+     *          если колода закончилась.
      */
     public int pickCard() {
-        return cards[pointer++];
+        return pointer == DECK_SIZE ? -1 : cards[pointer++];
     }
 
     /**
@@ -68,16 +62,28 @@ public class Deck {
 
     /**
      * Перемешивание массива колоды.
+     * Гарантирует, что колода точно изменится.
      */
     private void shuffleDeck() {
         Random rnd = new Random();
+        int[] originalOrder = cards.clone();
+        boolean isSameOrder = true;
 
-        for (int i = DECK_SIZE - 1; i > 0; i--) {
-            int index = rnd.nextInt(i + 1);
-            int buffer = cards[index];
+        while (isSameOrder) {
+            for (int i = DECK_SIZE - 1; i > 0; i--) {
+                int index = rnd.nextInt(i + 1);
+                int buffer = cards[index];
 
-            cards[index] = cards[i];
-            cards[i] = buffer;
+                cards[index] = cards[i];
+                cards[i] = buffer;
+            }
+
+            for (int i = 0; i < DECK_SIZE; i++) {
+                if (cards[i] != originalOrder[i]) {
+                    isSameOrder = false;
+                    break;
+                }
+            }
         }
     }
 }

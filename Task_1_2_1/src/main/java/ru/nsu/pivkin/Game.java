@@ -76,7 +76,7 @@ public class Game {
      * @param dealer - объект класса Player, дилер.
      * @param deck - объект класса Deck, колода в раунде.
      */
-    private static void userTurn(Player user, Player dealer, Deck deck) {
+    public static void userTurn(Player user, Player dealer, Deck deck) {
         if(user.currentScore() == 21) {
             System.out.print("Блэкджек! Вы выиграли этот раунд! ");
             user.win();
@@ -129,7 +129,7 @@ public class Game {
      * @param dealer - объект класса Player, дилер.
      * @param deck - объект класса Deck, колода в раунде.
      */
-    private static void dealerTurn(Player user, Player dealer, Deck deck) {
+    public static void dealerTurn(Player user, Player dealer, Deck deck) {
         System.out.println("Ход дилера");
         System.out.println("-------");
 
@@ -170,7 +170,7 @@ public class Game {
      * @param user - объект класса Player, пользователь.
      * @param dealer - объект класса Player, дилер.
      */
-    private static void showPoints(Player user, Player dealer){
+    public static void showPoints(Player user, Player dealer){
         System.out.print("Счёт " + String.valueOf(user.currentPoints()) + ":" + String.valueOf(dealer.currentPoints()));
         if (user.currentPoints() > dealer.currentPoints()) {
             System.out.println(" в вашу пользу.");

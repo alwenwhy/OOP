@@ -45,8 +45,19 @@ class BlackjackTest {
         assertEquals(21, player.currentScore());
     }
 
+
+
     @Test
-    void checkCards() {
+    void deckHaveEnding() {
+        Deck deck = new Deck();
+        for(int i = 0; i < 52; i++)
+            deck.pickCard();
+
+        assertEquals(-1, deck.pickCard());
+    }
+
+    @Test
+    void checkUniCards() {
         Deck deck = new Deck();
         int cardOne = deck.pickCard();
 
@@ -54,6 +65,26 @@ class BlackjackTest {
         for (int i = 0; i < 51; i++) {
             assertTrue(cardOne != deck.pickCard());
         }
+    }
+
+    @Test
+    void checkDeckUpdating() {
+        int[] cardsOne = new int[52];
+        int[] cardsTwo = new int[52];
+
+        Deck deck = new Deck();
+
+        for (int i = 0; i < 52; i++) {
+            cardsOne[i] = deck.pickCard();
+        }
+
+        deck.updateDeck();
+
+        for (int i = 0; i < 52; i++) {
+            cardsTwo[i] = deck.pickCard();
+        }
+
+        assertNotEquals(cardsOne, cardsTwo);
     }
 
     @Test
@@ -79,5 +110,28 @@ class BlackjackTest {
 
         assertEquals(1, user.currentPoints());
         assertEquals(1, dealer.currentPoints());
+    }
+
+
+
+    @Test
+    void checkGame() {
+        Deck deck = new Deck();
+        Player user = new Player();
+        Player dealer = new Player();
+
+        user.addCard(deck.pickCard());
+        user.addCard(deck.pickCard());
+        dealer.addCard(deck.pickCard());
+
+        Game.dealerTurn(user, dealer, deck);
+
+        if (dealer.currentScore() > 21 || dealer.currentScore() < user.currentScore()) {
+            assertEquals(1, user.currentPoints());
+            assertEquals(0, dealer.currentPoints());
+        } else {
+            assertEquals(1, user.currentPoints());
+            assertEquals(0, dealer.currentPoints());
+        }
     }
 }
