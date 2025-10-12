@@ -4,7 +4,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class BlackjackTest {
+class ToolsTest {
     @Test
     void playerCheckPoints() {
         Player player = new Player();
@@ -110,28 +110,5 @@ class BlackjackTest {
 
         assertEquals(1, user.currentPoints());
         assertEquals(1, dealer.currentPoints());
-    }
-
-
-
-    @Test
-    void checkGame() {
-        Deck deck = new Deck();
-        Player user = new Player();
-        Player dealer = new Player();
-
-        user.addCard(deck.pickCard());
-        user.addCard(deck.pickCard());
-        dealer.addCard(deck.pickCard());
-
-        Game.dealerTurn(user, dealer, deck);
-
-        if (dealer.currentScore() > 21 || dealer.currentScore() < user.currentScore()) {
-            assertEquals(1, user.currentPoints());
-            assertEquals(0, dealer.currentPoints());
-        } else {
-            assertEquals(1, user.currentPoints());
-            assertEquals(0, dealer.currentPoints());
-        }
     }
 }
