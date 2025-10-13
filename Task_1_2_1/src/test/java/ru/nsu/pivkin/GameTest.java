@@ -243,4 +243,18 @@ class GameTest {
         String output = outContent.toString();
         assertTrue(output.contains("Раунд 1"));
     }
+
+    @Test
+    void checkExtraExit() {
+        Deck deck = new Deck();
+        Player user = new Player();
+        Player dealer = new Player();
+
+        user.addCard(108); // 10 очков
+        user.addCard(112); // 11 очков
+
+        Game.dealerTurn(user, dealer, deck);
+
+        assertEquals(0, dealer.currentScore());
+    }
 }

@@ -7,35 +7,24 @@ import java.util.Objects;
  * Содержит цикл с раундами и логику подсчётов побед.
  */
 public class Game {
-
     public static void main(String[] args) {
         System.out.println("Добро пожаловать в Блэкджек!");
 
-        //Инициализация ключевых объектов игры
         Deck deck = new Deck();
         Player user = new Player();
         Player dealer = new Player();
 
-        //Для ввода
         Scanner input = new Scanner(System.in);
         String decision;
 
-        int round = 1;
         boolean continueGame = true;
 
         while(continueGame) {
             roundBegin(user, dealer, deck);
             userTurn(user, dealer, deck);
-
-            //Если у игрока блекджек или перебор - продолжать незачем.
-            if(user.currentScore() < 21) {
-                dealerTurn(user, dealer, deck);
-            }
-
-            //Счёт по всем раундам.
+            dealerTurn(user, dealer, deck);
             showPoints(user, dealer);
 
-            //Для продолжение игры (нового раунда).
             System.out.println("Введите “1” чтобы продолжить игру");
             decision = input.nextLine();
             if (!Objects.equals(decision, "1")) {
@@ -140,6 +129,10 @@ public class Game {
      * @param deck - объект класса Deck, колода в раунде.
      */
     public static void dealerTurn(Player user, Player dealer, Deck deck) {
+        if (user.currentScore() >= 21) {
+            return;
+        }
+
         System.out.println("Ход дилера");
         System.out.println("-------");
 
