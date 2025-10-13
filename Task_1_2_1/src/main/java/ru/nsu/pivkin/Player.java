@@ -12,13 +12,13 @@ import java.util.ArrayList;
  * Ещё здесь карты переводятся с формата XYY в понятное название карты.
  */
 public class Player {
-    private final String[] TYPES = {
-            "Двойка", "Тройка", "Четвёрка", "Пятёрка",
-            "Шестёрка", "Семёрка", "Восьмёрка", "Девятка",
-            "Десятка", "Валет", "Дама", "Король", "Туз"
+    private final String[] types = {
+        "Двойка", "Тройка", "Четвёрка", "Пятёрка",
+        "Шестёрка", "Семёрка", "Восьмёрка", "Девятка",
+        "Десятка", "Валет", "Дама", "Король", "Туз"
     };
-    private final String[] SUITS = {
-            "Пик", "Треф", "Червей", "Бубен"
+    private final String[] suits = {
+        "Пик", "Треф", "Червей", "Бубен"
     };
 
     private int points;
@@ -145,7 +145,7 @@ public class Player {
 
         int value = cardToValue(card);
 
-        return (TYPES[type] + " " + SUITS[suit] + " (" + String.valueOf(value) + ")");
+        return (types[type] + " " + suits[suit] + " (" + String.valueOf(value) + ")");
     }
 
     /**
