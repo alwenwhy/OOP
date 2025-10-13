@@ -1,12 +1,18 @@
 package ru.nsu.pivkin;
-import java.util.Scanner;
+
 import java.util.Objects;
+import java.util.Scanner;
 
 /**
  * Класс, где пользователь может поиграть в блекджэк.
  * Содержит цикл с раундами и логику подсчётов побед.
  */
 public class Game {
+    /**
+     * Метод main, "центр" всей программы.
+     *
+     * @param args аргументы командной строки (не используются)
+     */
     public static void main(String[] args) {
         Deck deck = new Deck();
         Player user = new Player();
@@ -16,7 +22,7 @@ public class Game {
         boolean continueGame = true;
         String decision = "1";
 
-        while(Objects.equals(decision, "1")) {
+        while (Objects.equals(decision, "1")) {
             roundBegin(user, dealer, deck);
             userTurn(user, dealer, deck);
             dealerTurn(user, dealer, deck);
@@ -37,7 +43,9 @@ public class Game {
      * @param deck - объект класса Deck, колода в раунде.
      */
     public static void roundBegin(Player user, Player dealer, Deck deck) {
-        System.out.println("Раунд " + String.valueOf(user.currentPoints() + dealer.currentPoints() + 1));
+        System.out.println("Раунд " + String.valueOf(
+                user.currentPoints() + dealer.currentPoints() + 1)
+        );
 
         deck.updateDeck();
         user.updatePlayer();
@@ -70,7 +78,7 @@ public class Game {
      * @param deck - объект класса Deck, колода в раунде.
      */
     public static void userTurn(Player user, Player dealer, Deck deck) {
-        if(user.currentScore() == 21) {
+        if (user.currentScore() == 21) {
             System.out.print("Блэкджек! Вы выиграли этот раунд! ");
             user.win();
 
@@ -96,14 +104,14 @@ public class Game {
                 dealer.showCards(true);
                 System.out.println();
 
-                if(user.currentScore() == 21) {
+                if (user.currentScore() == 21) {
                     System.out.print("Блэкджек! Вы выиграли этот раунд! ");
                     user.win();
 
                     return;
                 }
 
-                if(user.currentScore() > 21) {
+                if (user.currentScore() > 21) {
                     System.out.print("Перебор! Вы проиграли этот раунд! ");
                     dealer.win();
 
@@ -167,8 +175,10 @@ public class Game {
      * @param user - объект класса Player, пользователь.
      * @param dealer - объект класса Player, дилер.
      */
-    public static void showPoints(Player user, Player dealer){
-        System.out.print("Счёт " + String.valueOf(user.currentPoints()) + ":" + String.valueOf(dealer.currentPoints()));
+    public static void showPoints(Player user, Player dealer) {
+        System.out.print("Счёт " + String.valueOf(
+                user.currentPoints()) + ":" + String.valueOf(dealer.currentPoints())
+        );
         if (user.currentPoints() > dealer.currentPoints()) {
             System.out.println(" в вашу пользу.");
         } else if (user.currentPoints() < dealer.currentPoints()) {

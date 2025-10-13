@@ -1,6 +1,6 @@
 package ru.nsu.pivkin;
+
 import java.util.Random;
-import java.util.Arrays;
 
 /**
  * Класс Deck для абстракции колоды с 52-мя игральными картами.

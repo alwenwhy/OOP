@@ -50,8 +50,9 @@ class ToolsTest {
     @Test
     void deckHaveEnding() {
         Deck deck = new Deck();
-        for(int i = 0; i < 52; i++)
+        for (int i = 0; i < 52; i++) {
             deck.pickCard();
+        }
 
         assertEquals(-1, deck.pickCard());
     }
@@ -91,11 +92,12 @@ class ToolsTest {
     void testGameWithEmptyHands() {
         Deck deck = new Deck();
         Player user = new Player();
-        Player dealer = new Player();
 
         user.addCard(deck.pickCard());
         user.addCard(deck.pickCard());
         user.showCards(false);
+
+        Player dealer = new Player();
         assertTrue(user.currentScore() > dealer.currentScore());
         user.win();
 

@@ -1,6 +1,6 @@
 package ru.nsu.pivkin;
-import java.util.ArrayList;
 
+import java.util.ArrayList;
 
 /**
  * Класс Player нужен для абстракции играющего в игру лица.
@@ -30,7 +30,7 @@ public class Player {
      * Конструктор класса Player.
      * При создании объекта очки, счёт и "рука" становятся пустыми.
      */
-    public Player () {
+    public Player() {
         score = 0;
         points = 0;
         cards = new ArrayList<String>();
@@ -103,12 +103,12 @@ public class Player {
             String curr = cards.get(i);
             System.out.print(curr);
 
-            if(i < n - 1) {
+            if (i < n - 1) {
                 System.out.print(", ");
             }
         }
 
-        if(hidden) {
+        if (hidden) {
             System.out.print(", <закрытая карта>]");
         } else {
             System.out.print("] ⇒ " + String.valueOf(score));
