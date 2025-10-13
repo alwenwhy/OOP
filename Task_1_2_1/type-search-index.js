@@ -1,1 +1,1 @@
-typeSearchIndex = [{"l":"All Classes and Interfaces","u":"allclasses-index.html"},{"p":"ru.nsu.pivkin","l":"Deck"},{"p":"ru.nsu.pivkin","l":"Game"},{"p":"ru.nsu.pivkin","l":"Player"}];updateSearchResults();
+typeSearchIndex = [{"l":"All Classes and Interfaces","u":"allclasses-index.html"},{"p":"ru.nsu.pivkin","l":"Deck"},{"p":"ru.nsu.pivkin","l":"Game"},{"p":"ru.nsu.pivkin","l":"Main"},{"p":"ru.nsu.pivkin","l":"Player"}];updateSearchResults();
