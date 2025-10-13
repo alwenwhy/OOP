@@ -33,7 +33,7 @@ public class Player {
     public Player() {
         score = 0;
         points = 0;
-        cards = new ArrayList<String>();
+        cards = new ArrayList<>();
     }
 
     /**
@@ -41,7 +41,7 @@ public class Player {
      * Очки и "рука" вновь становятся пустыми.
      * Счёт сохраняется.
      */
-    public void updatePlayer() {
+    public void resetPlayer() {
         score = 0;
         cards.clear();
     }
@@ -50,7 +50,7 @@ public class Player {
      * Если объект объявлен победилем - увеличиваем счёт.
      */
     public void win() {
-        points++;
+        points ++;
     }
 
     /**

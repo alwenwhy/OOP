@@ -19,7 +19,7 @@ class ToolsTest {
         player.win();
         player.addCard(207);
 
-        player.updatePlayer();
+        player.resetPlayer();
 
         assertEquals(0, player.currentScore());
         assertEquals(1, player.currentPoints());
@@ -101,7 +101,7 @@ class ToolsTest {
         assertTrue(user.currentScore() > dealer.currentScore());
         user.win();
 
-        user.updatePlayer();
+        user.resetPlayer();
 
         dealer.addCard(deck.pickCard());
         dealer.showCards(true);

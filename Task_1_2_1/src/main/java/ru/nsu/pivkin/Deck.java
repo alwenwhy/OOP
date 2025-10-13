@@ -9,7 +9,7 @@ import java.util.Random;
  * YY - Тип карты (значение от 0 до 12).
  */
 public class Deck {
-    private final int decksize = 52;
+    private static final int DECK_SIZE = 52;
 
     private int[] cards;
     private int pointer;
@@ -20,7 +20,7 @@ public class Deck {
      * Создаётся массив карт, указатель устанавливается на первую карту.
      */
     public Deck() {
-        cards = new int[decksize];
+        cards = new int[DECK_SIZE];
         this.createDeck();
         pointer = 0;
     }
@@ -44,7 +44,7 @@ public class Deck {
      *          если колода закончилась.
      */
     public int pickCard() {
-        return pointer == decksize ? -1 : cards[pointer++];
+        return pointer == DECK_SIZE ? -1 : cards[pointer++];
     }
 
     /**
@@ -70,7 +70,7 @@ public class Deck {
         boolean isSameOrder = true;
 
         while (isSameOrder) {
-            for (int i = decksize - 1; i > 0; i--) {
+            for (int i = DECK_SIZE - 1; i > 0; i--) {
                 int index = rnd.nextInt(i + 1);
                 int buffer = cards[index];
 
@@ -78,7 +78,7 @@ public class Deck {
                 cards[i] = buffer;
             }
 
-            for (int i = 0; i < decksize; i++) {
+            for (int i = 0; i < DECK_SIZE; i++) {
                 if (cards[i] != originalOrder[i]) {
                     isSameOrder = false;
                     break;

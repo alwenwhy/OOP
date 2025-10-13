@@ -8,30 +8,6 @@ import java.util.Scanner;
  * Содержит цикл с раундами и логику подсчётов побед.
  */
 public class Game {
-    /**
-     * Метод main, "центр" всей программы.
-     *
-     * @param args аргументы командной строки (не используются)
-     */
-    public static void main(String[] args) {
-        Deck deck = new Deck();
-        Player user = new Player();
-        Player dealer = new Player();
-
-        Scanner input = new Scanner(System.in);
-        boolean continueGame = true;
-        String decision = "1";
-
-        while (Objects.equals(decision, "1")) {
-            roundBegin(user, dealer, deck);
-            userTurn(user, dealer, deck);
-            dealerTurn(user, dealer, deck);
-            showPoints(user, dealer);
-
-            System.out.println("Введите “1” чтобы продолжить игру");
-            decision = input.nextLine();
-        }
-    }
 
     /**
      * Тут просто описывается начало игры, где пользователь
@@ -48,8 +24,8 @@ public class Game {
         );
 
         deck.updateDeck();
-        user.updatePlayer();
-        dealer.updatePlayer();
+        user.resetPlayer();
+        dealer.resetPlayer();
 
         /*
             В начале игры дилер берёт одну карту, вопреки правилам игры.
