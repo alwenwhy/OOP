@@ -24,31 +24,7 @@ public class Game {
         boolean continueGame = true;
 
         while(continueGame) {
-            System.out.println("Раунд " + String.valueOf(round++));
-
-            deck.updateDeck();
-            user.updatePlayer();
-            dealer.updatePlayer();
-
-            /*
-            В начале игры дилер берёт одну карту, вопреки правилам игры.
-            Через метод showCards(true) как раз таки показывается вторая
-            закрытая карта. Это чисто для визуальной составляющей, т. к.
-            из-за фактора случайности технически ничего не поменялось.
-             */
-            user.addCard(deck.pickCard());
-            user.addCard(deck.pickCard());
-            dealer.addCard(deck.pickCard());
-
-
-            System.out.println("Дилер раздал карты");
-            System.out.print("    Ваши карты: ");
-            user.showCards(false);
-            System.out.print("    Карты дилера: ");
-            dealer.showCards(true);
-            System.out.println();
-
-            //Ход игрока и взаимодействие с вводом.
+            roundBegin(user, dealer, deck);
             userTurn(user, dealer, deck);
 
             //Если у игрока блекджек или перебор - продолжать незачем.
@@ -66,6 +42,40 @@ public class Game {
                 continueGame = false;
             }
         }
+    }
+
+    /**
+     * Тут просто описывается начало игры, где пользователь
+     * и дилер берут по две карты. Вынесено для облегчения метода
+     * main и для тестов.
+     *
+     * @param user - объект класса Player, пользователь.
+     * @param dealer - объект класса Player, дилер.
+     * @param deck - объект класса Deck, колода в раунде.
+     */
+    public static void roundBegin(Player user, Player dealer, Deck deck) {
+        System.out.println("Раунд " + String.valueOf(user.currentPoints() + dealer.currentPoints() + 1));
+
+        deck.updateDeck();
+        user.updatePlayer();
+        dealer.updatePlayer();
+
+        /*
+            В начале игры дилер берёт одну карту, вопреки правилам игры.
+            Через метод showCards(true) как раз таки показывается вторая
+            закрытая карта. Это чисто для визуальной составляющей, т. к.
+            из-за фактора случайности технически ничего не поменялось.
+        */
+        user.addCard(deck.pickCard());
+        user.addCard(deck.pickCard());
+        dealer.addCard(deck.pickCard());
+
+        System.out.println("Дилер раздал карты");
+        System.out.print("    Ваши карты: ");
+        user.showCards(false);
+        System.out.print("    Карты дилера: ");
+        dealer.showCards(true);
+        System.out.println();
     }
 
     /**

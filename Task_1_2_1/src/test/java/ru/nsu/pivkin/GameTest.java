@@ -218,4 +218,29 @@ class GameTest {
         assertTrue(!output.contains("в пользу")); // не должно быть указания на победителя
     }
 
+
+    @Test
+    void checkRoundBegin() {
+        Deck deck = new Deck();
+        Player user = new Player();
+        Player dealer = new Player();
+
+        Game.roundBegin(user, dealer, deck);
+
+        String output = outContent.toString();
+        assertTrue(output.contains("<закрытая карта>"));
+        assertTrue(output.contains("Дилер раздал карты"));
+    }
+
+    @Test
+    void checkRoundCounting() {
+        Deck deck = new Deck();
+        Player user = new Player();
+        Player dealer = new Player();
+
+        Game.roundBegin(user, dealer, deck);
+
+        String output = outContent.toString();
+        assertTrue(output.contains("Раунд 1"));
+    }
 }
