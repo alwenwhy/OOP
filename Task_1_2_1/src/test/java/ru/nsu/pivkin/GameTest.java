@@ -215,7 +215,7 @@ class GameTest {
 
         String output = outContent.toString();
         assertTrue(output.contains("Счёт 1:1"));
-        assertTrue(!output.contains("в пользу")); // не должно быть указания на победителя
+        assertFalse(output.contains("в пользу")); // не должно быть указания на победителя
     }
 
 
@@ -245,13 +245,28 @@ class GameTest {
     }
 
     @Test
-    void checkExtraExit() {
+    void checkExtraExitWithBlackjack() {
         Deck deck = new Deck();
         Player user = new Player();
         Player dealer = new Player();
 
         user.addCard(108); // 10 очков
         user.addCard(112); // 11 очков
+
+        Game.dealerTurn(user, dealer, deck);
+
+        assertEquals(0, dealer.currentScore());
+    }
+
+    @Test
+    void checkExtraExitWithBust() {
+        Deck deck = new Deck();
+        Player user = new Player();
+        Player dealer = new Player();
+
+        user.addCard(108); // 10 очков
+        user.addCard(112); // 11 очков
+        user.addCard(103);
 
         Game.dealerTurn(user, dealer, deck);
 
