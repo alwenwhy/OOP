@@ -8,18 +8,15 @@ import java.util.Objects;
  */
 public class Game {
     public static void main(String[] args) {
-        System.out.println("Добро пожаловать в Блэкджек!");
-
         Deck deck = new Deck();
         Player user = new Player();
         Player dealer = new Player();
 
         Scanner input = new Scanner(System.in);
-        String decision;
-
         boolean continueGame = true;
+        String decision = "1";
 
-        while(continueGame) {
+        while(Objects.equals(decision, "1")) {
             roundBegin(user, dealer, deck);
             userTurn(user, dealer, deck);
             dealerTurn(user, dealer, deck);
@@ -27,35 +24,6 @@ public class Game {
 
             System.out.println("Введите “1” чтобы продолжить игру");
             decision = input.nextLine();
-            if (!Objects.equals(decision, "1")) {
-                continueGame = false;
-            }
-        }
-    }
-
-    public static void GameProcess() {
-        System.out.println("Добро пожаловать в Блэкджек!");
-
-        Deck deck = new Deck();
-        Player user = new Player();
-        Player dealer = new Player();
-
-        Scanner input = new Scanner(System.in);
-        String decision;
-
-        boolean continueGame = true;
-
-        while(continueGame) {
-            roundBegin(user, dealer, deck);
-            userTurn(user, dealer, deck);
-            dealerTurn(user, dealer, deck);
-            showPoints(user, dealer);
-
-            System.out.println("Введите “1” чтобы продолжить игру");
-            decision = input.nextLine();
-            if (!Objects.equals(decision, "1")) {
-                continueGame = false;
-            }
         }
     }
 
