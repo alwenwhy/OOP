@@ -32,15 +32,17 @@ public abstract class Expression {
      */
     public static Map<String, Integer> parser(String stringVars) {
         Map<String, Integer> map = new HashMap<>();
-        if (stringVars == null || stringVars.isBlank())
+        if (stringVars == null || stringVars.isBlank()) {
             return map;
+        }
 
         String[] parts = stringVars.split(";");
         int n = parts.length;
         for (int i = 0; i < n; i++) {
             String trimmed = parts[i].trim();
-            if (trimmed.isEmpty())
+            if (trimmed.isEmpty()) {
                 continue;
+            }
 
             String[] kv = trimmed.split("="); //key-var part
             if (kv.length == 2) {

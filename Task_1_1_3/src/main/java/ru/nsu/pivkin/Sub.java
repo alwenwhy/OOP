@@ -6,7 +6,8 @@ import java.util.Map;
  * Класс, представляющий операцию вычитания двух выражений.
  */
 public class Sub extends Expression {
-    private final Expression left, right;
+    private final Expression left;
+    private final Expression right;
 
     /**
      * Создаёт выражение разности двух подвыражений.

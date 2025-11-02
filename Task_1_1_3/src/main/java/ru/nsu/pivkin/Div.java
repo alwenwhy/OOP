@@ -6,7 +6,8 @@ import java.util.Map;
  * Класс, представляющий операцию деления двух выражений.
  */
 public class Div extends Expression {
-    private final Expression left, right;
+    private final Expression left;
+    private final Expression right;
 
     /**
      * Создаёт выражение деление двух подвыражений.

@@ -1,9 +1,12 @@
 package ru.nsu.pivkin;
 
-import org.junit.jupiter.api.Test;
-
 import static org.junit.jupiter.api.Assertions.*;
 
+import org.junit.jupiter.api.Test;
+
+/**
+ * Тесты для класса Variable.
+ */
 public class VariableTest {
     @Test
     void testEvalUsesVariableValue() {

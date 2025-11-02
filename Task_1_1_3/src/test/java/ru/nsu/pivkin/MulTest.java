@@ -1,9 +1,12 @@
 package ru.nsu.pivkin;
 
-import org.junit.jupiter.api.Test;
-
 import static org.junit.jupiter.api.Assertions.*;
 
+import org.junit.jupiter.api.Test;
+
+/**
+ * Тесты для класса Mul.
+ */
 public class MulTest {
     @Test
     void testMultiplicationEval() {

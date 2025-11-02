@@ -6,7 +6,8 @@ import java.util.Map;
  * Класс, представляющий операцию умножения двух выражений.
  */
 public class Mul extends Expression {
-    private final Expression left, right;
+    private final Expression left;
+    private final Expression right;
 
     /**
      * Создаёт выражение умножения двух подвыражений.

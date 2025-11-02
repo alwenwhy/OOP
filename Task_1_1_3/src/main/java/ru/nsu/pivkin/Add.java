@@ -6,7 +6,8 @@ import java.util.Map;
  * Класс, представляющий операцию сложения двух выражений.
  */
 public class Add extends Expression {
-    private final Expression left, right;
+    private final Expression left;
+    private final Expression right;
 
     /**
      * Создаёт выражение сложения двух подвыражений.
