@@ -41,4 +41,10 @@ public class SubTest {
         Expression d = e.derivative("x");
         assertEquals(1, d.eval("x=5;y=3"));
     }
+
+    @Test
+    void testPrintFormat() {
+        Expression e = new Sub(new Variable("a"), new Variable("b"));
+        assertDoesNotThrow(e::print);
+    }
 }

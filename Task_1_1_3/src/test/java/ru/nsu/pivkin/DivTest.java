@@ -38,4 +38,10 @@ public class DivTest {
         Expression e = new Div(new Variable("x"), new Variable("y"));
         assertEquals(-2, e.eval("x=-10;y=5"));
     }
+
+    @Test
+    void testPrintFormat() {
+        Expression e = new Div(new Variable("a"), new Variable("b"));
+        assertDoesNotThrow(e::print);
+    }
 }
