@@ -25,8 +25,9 @@ public class Variable extends Expression {
      */
     @Override
     public int normalizedEval(Map<String, Integer> vars) {
-        if (!vars.containsKey(name))
+        if (!vars.containsKey(name)) {
             throw new IllegalArgumentException("Variable " + name + " not assigned");
+        }
 
         return vars.get(name);
     }
