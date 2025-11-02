@@ -30,7 +30,7 @@ public abstract class Expression {
      * @param stringVars - строка переменных типа "имя=значение", разделённых ";"
      * @return - Map (пары вида "ключ-значение")
      */
-    public static Map<String, Integer> parser(String stringVars) {
+    private static Map<String, Integer> parser(String stringVars) {
         Map<String, Integer> map = new HashMap<>();
         if (stringVars == null || stringVars.isBlank()) {
             return map;
