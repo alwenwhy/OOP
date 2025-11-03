@@ -5,7 +5,7 @@ import java.util.Map;
 /**
  * Класс, представляющий операцию деления двух выражений.
  */
-public class Div extends Expression {
+public class Div implements Expression {
     private final Expression left;
     private final Expression right;
 
@@ -27,8 +27,8 @@ public class Div extends Expression {
      * @return - значение частного
      */
     @Override
-    public int normalizedEval(Map<String, Integer> vars) {
-        return left.normalizedEval(vars) / right.normalizedEval(vars);
+    public int eval(Map<String, Integer> vars) {
+        return left.eval(vars) / right.eval(vars);
     }
 
     /**
@@ -53,11 +53,7 @@ public class Div extends Expression {
      * Вывод выражения деления.
      */
     @Override
-    public void print() {
-        System.out.print("(");
-        left.print();
-        System.out.print("/");
-        right.print();
-        System.out.print(")");
+    public String toString() {
+        return "(" + left + "/" + right +")";
     }
 }

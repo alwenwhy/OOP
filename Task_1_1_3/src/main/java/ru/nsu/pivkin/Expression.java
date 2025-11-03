@@ -4,55 +4,38 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Абстрактный класс для всех математических выражений.
- * Разбивает строку на переменные и определяет методы для
- * вычисления, дифференцирования и вывода.
+ * Математическое выражение. Содержит методы вычисления выражения по набору переменных,
+ * вычисления производной, а так же вывода в строку с помощью toString()
+ * Чтобы создать математическое выражение необходимо использовать наследники этого интерфейса.
+ * Наследники это:
+ * Add - сумма двух чисел<br/>
+ * Sub - разность двух чисел<br/>
+ * Mul - произведение двух чисел<br>
+ * Div - часное двух чисел<br/>
+ * Variable - переменная<br/>
+ * Number - константа<br/>
+ * Например:
+ * Expression multiplication = new Mul(new Add(new Variable("x"), new Variable("y")), new Variable("z")) // создает выражение (x+y)*z
+ * <br/>
+ * Разработчик может создать свою операцию на этого интерфейса, переопределив необходимые методы.
+ * В часности необходимо переопределить toString для вывода выражения в строку
  */
-public abstract class Expression {
-    public abstract int normalizedEval(Map<String, Integer> vars);
-    public abstract Expression derivative(String variable);
-    public abstract void print();
-
+public interface Expression {
     /**
-     * Вычисление значения выражения при заданной строке переменных.
+     * Вычисление значения выражения при заданом наборе переменных.
      *
-     * @param stringVars - строка переменных типа "имя=значение", разделённых ";"
+     * @param vars - набор значений переменных (ключ - имя переменной, значение = значение переменной)
      * @return - результат вычисления выражения
+     * @throws ArithmeticException в случае если выражение не может быть вычисленно
      */
-    public int eval(String stringVars) {
-        Map<String, Integer> vars = this.parser(stringVars);
-        return normalizedEval(vars);
-    }
+    int eval(Map<String, Integer> vars);
 
     /**
-     * Парсер строки в структуру данных Map.
-     *
-     * @param stringVars - строка переменных типа "имя=значение", разделённых ";"
-     * @return - Map (пары вида "ключ-значение")
+     * Вычисление производной выражения
+     * @param variable переменная по которой вычисляется поизводная
+     * @return производная выражения
      */
-    private static Map<String, Integer> parser(String stringVars) {
-        Map<String, Integer> map = new HashMap<>();
-        if (stringVars == null || stringVars.isBlank()) {
-            return map;
-        }
+    Expression derivative(String variable);
 
-        String[] parts = stringVars.split(";");
-        int n = parts.length;
-        for (int i = 0; i < n; i++) {
-            String trimmed = parts[i].trim();
-            if (trimmed.isEmpty()) {
-                continue;
-            }
 
-            String[] kv = trimmed.split("="); //key-var part
-            if (kv.length == 2) {
-                String key = kv[0].trim();
-                int var = Integer.parseInt(kv[1].trim());
-
-                map.put(key, var);
-            }
-        }
-
-        return map;
-    }
 }

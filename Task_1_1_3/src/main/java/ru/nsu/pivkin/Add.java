@@ -5,7 +5,7 @@ import java.util.Map;
 /**
  * Класс, представляющий операцию сложения двух выражений.
  */
-public class Add extends Expression {
+public class Add implements Expression {
     private final Expression left;
     private final Expression right;
 
@@ -27,8 +27,8 @@ public class Add extends Expression {
      * @return - значение суммы
      */
     @Override
-    public int normalizedEval(Map<String, Integer> vars) {
-        return left.normalizedEval(vars) + right.normalizedEval(vars);
+    public int eval(Map<String, Integer> vars) {
+        return left.eval(vars) + right.eval(vars);
     }
 
     /**
@@ -47,11 +47,7 @@ public class Add extends Expression {
      * Вывод выражения сложения.
      */
     @Override
-    public void print() {
-        System.out.print("(");
-        left.print();
-        System.out.print("+");
-        right.print();
-        System.out.print(")");
+    public String toString() {
+        return "(" + left + "+" + right + ")";
     }
 }
