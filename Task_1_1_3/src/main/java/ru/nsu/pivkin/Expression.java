@@ -14,8 +14,8 @@ import java.util.Map;
  * Div - часное двух чисел<br/>
  * Variable - переменная<br/>
  * Number - константа<br/>
- * Например, создание выражения (x+y)*z:
- * Expression multiplication = new Mul(new Add(new Variable("x"), new Variable("y")), new Variable("z"))
+ * Например, создание выражения (5+x)*y:
+ * Expression example = new Mul(new Add(new Number(5), new Variable("x")), new Variable("y"))
  * <br/>
  * Разработчик может создать свою операцию на этого интерфейса, переопределив необходимые методы.
  * В часности необходимо переопределить toString для вывода выражения в строку
@@ -33,9 +33,9 @@ public interface Expression {
 
     /**
      * Вычисление производной выражения
-     * 
-     * @param variable переменная по которой вычисляется поизводная
-     * @return производная выражения
+     *
+     * @param variable - переменная, по которой вычисляется поизводная
+     * @return - производная выражения
      */
     Expression derivative(String variable);
 }
