@@ -3,12 +3,19 @@ package ru.nsu.pivkin;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * Утилиты для класса Expression.
+ * Используется для вычисления значения выражения.
+ */
 public final class ExpressionUtil {
     /**
      * Вычисление значения выражения при заданом наборе переменных.
      * Переменные заданы в виде строки "x=1;y=2" ...
+     *
+     * @param expression - выражение
+     * @param variables - строка переменных с их значениями
+     * @return - значение выражения
      */
-
     public static int evaluate(Expression expression, String variables) {
         return expression.eval(parser(variables));
     }

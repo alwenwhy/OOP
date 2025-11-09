@@ -54,6 +54,6 @@ public class Div implements Expression {
      */
     @Override
     public String toString() {
-        return "(" + left + "/" + right +")";
+        return "(" + left + "/" + right + ")";
     }
 }
