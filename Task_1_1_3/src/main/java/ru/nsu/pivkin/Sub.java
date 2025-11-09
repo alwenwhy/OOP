@@ -5,7 +5,7 @@ import java.util.Map;
 /**
  * Класс, представляющий операцию вычитания двух выражений.
  */
-public class Sub extends Expression {
+public class Sub implements Expression {
     private final Expression left;
     private final Expression right;
 
@@ -27,8 +27,8 @@ public class Sub extends Expression {
      * @return - значение разности
      */
     @Override
-    public int normalizedEval(Map<String, Integer> vars) {
-        return left.normalizedEval(vars) - right.normalizedEval(vars);
+    public int eval(Map<String, Integer> vars) {
+        return left.eval(vars) - right.eval(vars);
     }
 
     /**
@@ -44,14 +44,10 @@ public class Sub extends Expression {
     }
 
     /**
-     * Вывод выражения вычитания.
+     * Для вывода выражения вычитания.
      */
     @Override
-    public void print() {
-        System.out.print("(");
-        left.print();
-        System.out.print("-");
-        right.print();
-        System.out.print(")");
+    public String toString() {
+        return "(" + left + "-" + right + ")";
     }
 }

@@ -36,6 +36,4 @@ public interface Expression {
      * @return производная выражения
      */
     Expression derivative(String variable);
-
-
 }

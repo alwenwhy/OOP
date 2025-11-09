@@ -14,15 +14,13 @@ public class Main {
         Expression e = new Add(new Number(3), new Mul(new Number(2), new Variable("x")));
 
         System.out.print("Expression e = ");
-        e.print();
-        System.out.println();
+        System.out.println(e);
 
         System.out.print("Derivative de/dx = ");
         Expression de = e.derivative("x");
-        de.print();
-        System.out.println();
+        System.out.println(de);
 
-        int result = e.eval("x=10; y=13");
+        int result = ExpressionUtil.evaluate(e, "x=10; y=13");
         System.out.println("Eval for x=10; y=13 -> " + result);
     }
 }

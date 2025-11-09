@@ -5,7 +5,7 @@ import java.util.Map;
 /**
  * Класс, представляющий операцию умножения двух выражений.
  */
-public class Mul extends Expression {
+public class Mul implements Expression {
     private final Expression left;
     private final Expression right;
 
@@ -27,8 +27,8 @@ public class Mul extends Expression {
      * @return - значение произведения
      */
     @Override
-    public int normalizedEval(Map<String, Integer> vars) {
-        return left.normalizedEval(vars) * right.normalizedEval(vars);
+    public int eval(Map<String, Integer> vars) {
+        return left.eval(vars) * right.eval(vars);
     }
 
     /**
@@ -47,14 +47,10 @@ public class Mul extends Expression {
     }
 
     /**
-     * Вывод выражения умножения.
+     * Для вывода выражения умножения.
      */
     @Override
-    public void print() {
-        System.out.print("(");
-        left.print();
-        System.out.print("*");
-        right.print();
-        System.out.print(")");
+    public String toString() {
+        return "(" + left + "*" + right + ")";
     }
 }

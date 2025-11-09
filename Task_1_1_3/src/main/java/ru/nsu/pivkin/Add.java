@@ -44,7 +44,7 @@ public class Add implements Expression {
     }
 
     /**
-     * Вывод выражения сложения.
+     * Для вывода выражения сложения.
      */
     @Override
     public String toString() {

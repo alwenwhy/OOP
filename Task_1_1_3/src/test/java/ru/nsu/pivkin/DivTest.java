@@ -11,37 +11,37 @@ public class DivTest {
     @Test
     void testDivisionEval() {
         Expression e = new Div(new Variable("x"), new Number(2));
-        assertEquals(5, e.eval("x=10"));
+        assertEquals(5, ExpressionUtil.evaluate(e, "x=10"));
     }
 
     @Test
     void testDerivativeOfDivision() {
         Expression e = new Div(new Variable("x"), new Variable("x"));
         Expression d = e.derivative("x");
-        assertEquals(0, d.eval("x=5"));
+        assertEquals(0, ExpressionUtil.evaluate(d, "x=5"));
     }
 
     @Test
     void testDivisionEvalZero() {
         Expression e = new Div(new Number(2), new Number(0));
-        assertThrows(ArithmeticException.class, () -> e.eval(""));
+        assertThrows(ArithmeticException.class, () -> ExpressionUtil.evaluate(e, ""));
     }
 
     @Test
     void testDivisionEvalVariableDenominator() {
         Expression e = new Div(new Variable("x"), new Variable("y"));
-        assertEquals(2, e.eval("x=10;y=5"));
+        assertEquals(2, ExpressionUtil.evaluate(e, "x=10;y=5"));
     }
 
     @Test
     void testDivisionWithNegativeVars() {
         Expression e = new Div(new Variable("x"), new Variable("y"));
-        assertEquals(-2, e.eval("x=-10;y=5"));
+        assertEquals(-2, ExpressionUtil.evaluate(e, "x=-10;y=5"));
     }
 
     @Test
     void testPrintFormat() {
         Expression e = new Div(new Variable("a"), new Variable("b"));
-        assertDoesNotThrow(e::print);
+        assertDoesNotThrow(e::toString);
     }
 }

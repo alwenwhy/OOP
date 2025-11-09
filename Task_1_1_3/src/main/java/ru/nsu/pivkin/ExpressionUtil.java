@@ -10,7 +10,7 @@ public final class ExpressionUtil {
      */
 
     public static int evaluate(Expression expression, String variables) {
-         return expression.eval(parser(variables));
+        return expression.eval(parser(variables));
     }
 
     /**

@@ -50,7 +50,7 @@ public class Div implements Expression {
     }
 
     /**
-     * Вывод выражения деления.
+     * Для вывода выражения деления.
      */
     @Override
     public String toString() {

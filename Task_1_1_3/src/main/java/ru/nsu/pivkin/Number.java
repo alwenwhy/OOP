@@ -5,7 +5,7 @@ import java.util.Map;
 /**
  * Класс, представляющий числовую константу в выражении.
  */
-public class Number extends Expression {
+public class Number implements Expression {
     private final int value;
 
     /**
@@ -24,7 +24,7 @@ public class Number extends Expression {
      * @return - значение константы
      */
     @Override
-    public int normalizedEval(Map<String, Integer> vars) {
+    public int eval(Map<String, Integer> vars) {
         return value;
     }
 
@@ -40,11 +40,11 @@ public class Number extends Expression {
     }
 
     /**
-     * Вывод значения константы.
+     * Для вывода значения константы.
      */
     @Override
-    public void print() {
-        System.out.print(value);
+    public String toString() {
+        return String.valueOf(value);
     }
 }
 

@@ -5,7 +5,7 @@ import java.util.Map;
 /**
  * Класс, представляющий переменную в выражении.
  */
-public class Variable extends Expression {
+public class Variable implements Expression  {
     private final String name;
 
     /**
@@ -24,7 +24,7 @@ public class Variable extends Expression {
      * @return - значение константы
      */
     @Override
-    public int normalizedEval(Map<String, Integer> vars) {
+    public int eval(Map<String, Integer> vars) {
         if (!vars.containsKey(name)) {
             throw new IllegalArgumentException("Variable " + name + " not assigned");
         }
@@ -46,10 +46,10 @@ public class Variable extends Expression {
     }
 
     /**
-     * Вывод имени переменной.
+     * Для вывода имени переменной.
      */
     @Override
-    public void print() {
-        System.out.print(name);
+    public String toString() {
+        return name;
     }
 }
