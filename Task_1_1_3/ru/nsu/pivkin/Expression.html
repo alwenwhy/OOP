@@ -86,8 +86,8 @@ loadScripts(document, 'script');</script>
  Div - часное двух чисел<br/>
  Variable - переменная<br/>
  Number - константа<br/>
- Например:
- Expression multiplication = new Mul(new Add(new Variable("x"), new Variable("y")), new Variable("z")) // создает выражение (x+y)*z
+ Например, создание выражения (x+y)*z:
+ Expression multiplication = new Mul(new Add(new Variable("x"), new Variable("y")), new Variable("z"))
  <br/>
  Разработчик может создать свою операцию на этого интерфейса, переопределив необходимые методы.
  В часности необходимо переопределить toString для вывода выражения в строку</div>
@@ -136,7 +136,8 @@ loadScripts(document, 'script');</script>
 <div class="block">Вычисление значения выражения при заданом наборе переменных.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
-<dd><code>vars</code> - - набор значений переменных (ключ - имя переменной, значение = значение переменной)</dd>
+<dd><code>vars</code> - - набор значений переменных
+               (ключ - имя переменной, значение = значение переменной)</dd>
 <dt>Returns:</dt>
 <dd>- результат вычисления выражения</dd>
 <dt>Throws:</dt>
