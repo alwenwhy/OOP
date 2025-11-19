@@ -17,12 +17,20 @@ public class Main {
         try {
             GraphUtil.loadFromFile(args[0], g);
         } catch (IOException e) {
-            g.addEdge(2, 1);
-            g.addEdge(4, 2);
-            g.addEdge(3, 1);
+            throw new RuntimeException(e);
         }
 
         System.out.println(g);
         System.out.println(TopologicalSort.sort(g));
+
+        g.addEdge(4, 3);
+        g.addEdge(2, 3);
+
+        System.out.println(g);
+
+        g.removeVertex(2);
+
+        System.out.println(g);
+        System.out.println(g.equals(g));
     }
 }

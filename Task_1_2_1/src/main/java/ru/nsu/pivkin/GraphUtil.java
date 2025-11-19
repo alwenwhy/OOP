@@ -62,6 +62,10 @@ public class GraphUtil {
         List<Integer> list1 = g1.getVertices();
         List<Integer> list2 = g2.getVertices();
 
+        if (g1.isDirected() != g2.isDirected()) {
+            return false;
+        }
+
         if (list1.size() != list2.size()) {
             return false;
         }
