@@ -15,7 +15,11 @@
 <script type="text/javascript" src="../../../script-dir/jquery-ui.min.js"></script>
 </head>
 <body class="package-declaration-page">
-<script type="text/javascript">var pathtoroot = "../../../";
+<script type="text/javascript">var evenRowColor = "even-row-color";
+var oddRowColor = "odd-row-color";
+var tableTab = "table-tab";
+var activeTableTab = "active-table-tab";
+var pathtoroot = "../../../";
 loadScripts(document, 'script');</script>
 <noscript>
 <div>JavaScript is disabled on your browser.</div>
@@ -62,23 +66,39 @@ loadScripts(document, 'script');</script>
 <ul class="summary-list">
 <li>
 <div id="class-summary">
-<div class="caption"><span>Classes</span></div>
+<div class="table-tabs" role="tablist" aria-orientation="horizontal"><button id="class-summary-tab0" role="tab" aria-selected="true" aria-controls="class-summary.tabpanel" tabindex="0" onkeydown="switchTab(event)" onclick="show('class-summary', 'class-summary', 2)" class="active-table-tab">All Classes and Interfaces</button><button id="class-summary-tab1" role="tab" aria-selected="false" aria-controls="class-summary.tabpanel" tabindex="-1" onkeydown="switchTab(event)" onclick="show('class-summary', 'class-summary-tab1', 2)" class="table-tab">Interfaces</button><button id="class-summary-tab2" role="tab" aria-selected="false" aria-controls="class-summary.tabpanel" tabindex="-1" onkeydown="switchTab(event)" onclick="show('class-summary', 'class-summary-tab2', 2)" class="table-tab">Classes</button></div>
+<div id="class-summary.tabpanel" role="tabpanel" aria-labelledby="class-summary-tab0">
 <div class="summary-table two-column-summary">
 <div class="table-header col-first">Class</div>
 <div class="table-header col-last">Description</div>
-<div class="col-first even-row-color class-summary class-summary-tab2"><a href="Deck.html" title="class in ru.nsu.pivkin">Deck</a></div>
+<div class="col-first even-row-color class-summary class-summary-tab2"><a href="AdjacencyList.html" title="class in ru.nsu.pivkin">AdjacencyList</a></div>
 <div class="col-last even-row-color class-summary class-summary-tab2">
-<div class="block">Класс Deck для абстракции колоды с 52-мя игральными картами.</div>
+<div class="block">Реализация интерфейса Graph на основе списка смежности.</div>
 </div>
-<div class="col-first odd-row-color class-summary class-summary-tab2"><a href="Game.html" title="class in ru.nsu.pivkin">Game</a></div>
+<div class="col-first odd-row-color class-summary class-summary-tab2"><a href="AdjacencyMatrix.html" title="class in ru.nsu.pivkin">AdjacencyMatrix</a></div>
 <div class="col-last odd-row-color class-summary class-summary-tab2">
-<div class="block">Класс, где пользователь может поиграть в блекджэк.</div>
+<div class="block">Реализация интерфейса Graph на основе матрицы смежности.</div>
 </div>
-<div class="col-first even-row-color class-summary class-summary-tab2"><a href="Main.html" title="class in ru.nsu.pivkin">Main</a></div>
-<div class="col-last even-row-color class-summary class-summary-tab2">&nbsp;</div>
-<div class="col-first odd-row-color class-summary class-summary-tab2"><a href="Player.html" title="class in ru.nsu.pivkin">Player</a></div>
+<div class="col-first even-row-color class-summary class-summary-tab1"><a href="Graph.html" title="interface in ru.nsu.pivkin">Graph</a></div>
+<div class="col-last even-row-color class-summary class-summary-tab1">
+<div class="block">Интерфейс, описывающий базовый функционал ориентированных и неориентированных графов.</div>
+</div>
+<div class="col-first odd-row-color class-summary class-summary-tab2"><a href="GraphUtil.html" title="class in ru.nsu.pivkin">GraphUtil</a></div>
 <div class="col-last odd-row-color class-summary class-summary-tab2">
-<div class="block">Класс Player нужен для абстракции играющего в игру лица.</div>
+<div class="block">Утилитный класс для работы с графами.</div>
+</div>
+<div class="col-first even-row-color class-summary class-summary-tab2"><a href="IncidenceMatrix.html" title="class in ru.nsu.pivkin">IncidenceMatrix</a></div>
+<div class="col-last even-row-color class-summary class-summary-tab2">
+<div class="block">Реализация интерфейса Graph на основе матрицы инцидентности.</div>
+</div>
+<div class="col-first odd-row-color class-summary class-summary-tab2"><a href="Main.html" title="class in ru.nsu.pivkin">Main</a></div>
+<div class="col-last odd-row-color class-summary class-summary-tab2">
+<div class="block">Класс для демонстрации работоспособности.</div>
+</div>
+<div class="col-first even-row-color class-summary class-summary-tab2"><a href="TopologicalSort.html" title="class in ru.nsu.pivkin">TopologicalSort</a></div>
+<div class="col-last even-row-color class-summary class-summary-tab2">
+<div class="block">Класс с алгоритмом, реализующий топологическую сортировку для ориентированных графов.</div>
+</div>
 </div>
 </div>
 </div>
