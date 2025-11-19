@@ -72,17 +72,15 @@ public interface Graph {
     boolean isDirected();
 
     /**
-     * Возвращает строковое представление графа.
-     *
-     * @return - строковое описание графа.
-     */
-    String toString();
-
-    /**
      * Проверяет равенство двух графов (изоморфизм).
      *
      * @param obj - объект, с которым сравнивается граф.
      * @return - true если графы изоморфны, иначе false.
      */
+    @Override
     boolean equals(Object obj);
+
+    @Override
+    int hashCode();
+
 }
