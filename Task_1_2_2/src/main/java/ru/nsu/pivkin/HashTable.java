@@ -80,7 +80,8 @@ public class HashTable<K, V> implements Iterable<Map.Entry<K, V>> {
      */
     public V remove(K key) {
         int idx = index(key);
-        Node<K, V> prev = null, cur = table[idx];
+        Node<K, V> prev = null;
+        Node<K, V> cur = table[idx];
 
         while (cur != null) {
             if (Objects.equals(cur.key, key)) {
@@ -246,15 +247,17 @@ public class HashTable<K, V> implements Iterable<Map.Entry<K, V>> {
     @Override
     public Iterator<Map.Entry<K, V>> iterator() {
         return new Iterator<>() {
-            int bucket = 0;
+            int elem = 0;
             Node<K, V> cur = advance();
             final int expected = modifications;
 
             private Node<K, V> advance() {
-                while (bucket < table.length) {
-                    if (table[bucket] != null)
-                        return table[bucket++];
-                    bucket++;
+                while (elem < table.length) {
+                    if (table[elem] != null) {
+                        return table[elem++];
+                    }
+
+                    elem++;
                 }
                 return null;
             }
@@ -321,7 +324,7 @@ public class HashTable<K, V> implements Iterable<Map.Entry<K, V>> {
             return true;
         }
 
-        if (!(o instanceof HashTable other)){
+        if (!(o instanceof HashTable other)) {
             return false;
         }
 
@@ -332,7 +335,7 @@ public class HashTable<K, V> implements Iterable<Map.Entry<K, V>> {
         for (Node<K, V> head : table) {
             Node<K, V> cur = head;
 
-            while(cur != null) {
+            while (cur != null) {
                 Object otherVal = other.get(cur.key);
                 if (!Objects.equals(cur.value, otherVal)) {
                     return false;
