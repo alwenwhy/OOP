@@ -64,7 +64,9 @@ public class AdjacencyMatrix implements Graph {
     @Override
     public boolean removeVertex(int vertex) {
         Integer idxObj = indexMap.get(vertex);
-        if (idxObj == null) return false;
+        if (idxObj == null) {
+            return false;
+        }
 
         int idx = idxObj;
 
@@ -103,7 +105,9 @@ public class AdjacencyMatrix implements Graph {
      */
     @Override
     public boolean addEdge(int from, int to) {
-        if (from < 0 || to < 0) return false;
+        if (from < 0 || to < 0) {
+            return false;
+        }
 
         addVertex(from);
         addVertex(to);
@@ -112,7 +116,9 @@ public class AdjacencyMatrix implements Graph {
         int v = indexMap.get(to);
 
         matrix[u][v] = 1;
-        if (!directed) matrix[v][u] = 1;
+        if (!directed) {
+            matrix[v][u] = 1;
+        }
 
         return true;
     }
@@ -126,13 +132,17 @@ public class AdjacencyMatrix implements Graph {
      */
     @Override
     public boolean removeEdge(int from, int to) {
-        if (!indexMap.containsKey(from) || !indexMap.containsKey(to)) return false;
+        if (!indexMap.containsKey(from) || !indexMap.containsKey(to)) {
+            return false;
+        }
 
         int u = indexMap.get(from);
         int v = indexMap.get(to);
 
         matrix[u][v] = 0;
-        if (!directed) matrix[v][u] = 0;
+        if (!directed) {
+            matrix[v][u] = 0;
+        }
 
         return true;
     }
@@ -158,11 +168,15 @@ public class AdjacencyMatrix implements Graph {
     @Override
     public List<Integer> getNeighbors(int vertex) {
         Integer idx = indexMap.get(vertex);
-        if (idx == null) return List.of();
+        if (idx == null) {
+            return List.of();
+        }
 
         List<Integer> res = new ArrayList<>();
         for (int i = 0; i < vertices.size(); i++) {
-            if (matrix[idx][i] == 1) res.add(vertices.get(i));
+            if (matrix[idx][i] == 1) {
+                res.add(vertices.get(i));
+            }
         }
         return res;
     }
@@ -192,7 +206,9 @@ public class AdjacencyMatrix implements Graph {
                 .append(vertices)
                 .append("\nMatrix:\n\\ ");
 
-        for (int v : vertices) sb.append(v).append(" ");
+        for (int v : vertices) {
+            sb.append(v).append(" ");
+        }
         sb.append("\n");
 
         for (int i = 0; i < vertices.size(); i++) {
@@ -214,7 +230,9 @@ public class AdjacencyMatrix implements Graph {
      */
     @Override
     public boolean equals(Object obj) {
-        if (!(obj instanceof Graph other)) return false;
+        if (!(obj instanceof Graph other)) {
+            return false;
+        }
         return GraphUtil.isIsomorphic(this, other);
     }
 }

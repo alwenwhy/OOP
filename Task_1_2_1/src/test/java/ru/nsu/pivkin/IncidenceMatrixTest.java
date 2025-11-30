@@ -1,11 +1,15 @@
 package ru.nsu.pivkin;
 
+import java.util.List;
 import org.junit.jupiter.api.Test;
 
-import java.util.List;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import static org.junit.jupiter.api.Assertions.*;
-
+/**
+ * Тесты для класса IncidenceMatrix.
+ */
 class IncidenceMatrixTest {
 
     @Test

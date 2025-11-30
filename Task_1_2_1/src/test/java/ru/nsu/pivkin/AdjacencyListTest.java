@@ -1,16 +1,16 @@
 package ru.nsu.pivkin;
 
+import java.util.List;
 import org.junit.jupiter.api.Test;
 
-import java.util.List;
-
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 /**
- * Тесты для класса AdjacencyList
+ * Тесты для класса AdjacencyList.
  */
 class AdjacencyListTest {
-
     @Test
     void testAddAndRemoveVertex() {
         Graph g = new AdjacencyList(true);
