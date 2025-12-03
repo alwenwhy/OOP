@@ -1,7 +1,6 @@
 package ru.nsu.pivkin;
 
 import org.junit.jupiter.api.Test;
-
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -98,6 +97,31 @@ class AdjacencyListTest {
         g2.addEdge(5, 6);
 
         assertTrue(g1.equals(g2));
+    }
+
+    @Test
+    void testHashCodeForIsomorphicGraphs() {
+        Graph g1 = new AdjacencyList(true);
+        g1.addEdge(1, 2);
+        g1.addEdge(2, 3);
+
+        Graph g2 = new AdjacencyList(true);
+        g2.addEdge(4, 5);
+        g2.addEdge(5, 6);
+        
+        assertEquals(g1.hashCode(), g2.hashCode());
+    }
+
+    @Test
+    void testHashCodeForNonIsomorphicGraphs() {
+        Graph g1 = new AdjacencyList(true);
+        g1.addEdge(1, 2);
+
+        Graph g2 = new AdjacencyList(true);
+        g2.addEdge(1, 2);
+        g2.addEdge(2, 3);
+
+        assertNotEquals(g1.hashCode(), g2.hashCode());
     }
 }
 
