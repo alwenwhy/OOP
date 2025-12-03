@@ -32,22 +32,38 @@ public class GraphUtil {
      */
     public static void loadFromFile(String path, Graph g) throws IOException {
         try (BufferedReader br = new BufferedReader(new FileReader(path))) {
-            String[] parts = br.readLine().trim().split("\\s+");
-            int V = Integer.parseInt(parts[0]);
-            int E = Integer.parseInt(parts[1]);
+            loadFromFile(br, g);
+        }
+    }
 
-            for (int i = 0; i < E; i++) {
-                String line = br.readLine();
-                if (line == null) {
-                    throw new IOException("Внезапный конец файла");
-                }
+    public static void loadFromFile(BufferedReader br, Graph g) throws IOException {
+        String firstLine = br.readLine();
+        if (firstLine == null) {
+            throw new IOException("Неверный формат файла: отсутствует строка с количеством вершин и рёбер");
+        }
 
-                String[] uv = line.trim().split("\\s+");
-                int u = Integer.parseInt(uv[0]);
-                int v = Integer.parseInt(uv[1]);
+        String[] parts = firstLine.trim().split("\\s+");
+        if (parts.length != 2) {
+            throw new IOException("Неверный формат файла: требуется 2 числа (V и E)");
+        }
 
-                g.addEdge(u, v);
+        int V = Integer.parseInt(parts[0]);
+        int E = Integer.parseInt(parts[1]);
+
+        for (int i = 0; i < E; i++) {
+            String line = br.readLine();
+            if (line == null) {
+                throw new IOException("Неверный формат файла: отсутствует описание ребра №" + (i + 1));
             }
+
+            String[] uv = line.trim().split("\\s+");
+            if (uv.length != 2) {
+                throw new IOException("Неверный формат файла: строка ребра №" + (i + 1) + " должна содержать два целых числа");
+            }
+
+            int u = Integer.parseInt(uv[0]);
+            int v = Integer.parseInt(uv[1]);
+            g.addEdge(u, v);
         }
     }
 

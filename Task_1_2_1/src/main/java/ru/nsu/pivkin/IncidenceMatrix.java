@@ -267,6 +267,24 @@ public class IncidenceMatrix implements Graph {
     }
 
     /**
+     * Возвращает хеш-код графа.
+     *
+     * @return - хеш-код, основанный на отсортированном списке степеней вершин графа.
+     */
+    @Override
+    public int hashCode() {
+        List<Integer> vertices = getVertices();
+        List<Integer> degrees = new ArrayList<>();
+
+        for (int v : vertices) {
+            degrees.add(getNeighbors(v).size());
+        }
+
+        Collections.sort(degrees);
+        return degrees.hashCode();
+    }
+
+    /**
      * Возвращает индекс вершины в списке vertices.
      *
      * @param vertex - вершина

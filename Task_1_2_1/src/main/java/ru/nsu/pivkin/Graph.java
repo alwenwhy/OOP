@@ -80,6 +80,11 @@ public interface Graph {
     @Override
     boolean equals(Object obj);
 
+    /**
+     * Возвращает хеш-код графа.
+     *
+     * @return - хеш-код, основанный на отсортированном списке степеней вершин графа.
+     */
     @Override
     int hashCode();
 
