@@ -1,6 +1,10 @@
 package ru.nsu.pivkin;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * Реализация интерфейса Graph на основе матрицы смежности.
@@ -234,6 +238,24 @@ public class AdjacencyMatrix implements Graph {
             return false;
         }
         return GraphUtil.isIsomorphic(this, other);
+    }
+
+    /**
+     * Возвращает хеш-код графа.
+     *
+     * @return - хеш-код, основанный на отсортированном списке степеней вершин графа.
+     */
+    @Override
+    public int hashCode() {
+        List<Integer> vertices = getVertices();
+        List<Integer> degrees = new ArrayList<>();
+
+        for (int v : vertices) {
+            degrees.add(getNeighbors(v).size());
+        }
+
+        Collections.sort(degrees);
+        return degrees.hashCode();
     }
 }
 

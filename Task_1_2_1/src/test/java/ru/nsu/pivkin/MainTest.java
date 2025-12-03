@@ -1,9 +1,8 @@
 package ru.nsu.pivkin;
 
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Тест основной программы.
@@ -45,6 +44,8 @@ public class MainTest {
     @Test
     void checkIsomorphism() {
         Graph g1 = new AdjacencyMatrix(false);
+        Graph g2 = new AdjacencyList(false);
+
         g1.addEdge(1, 4);
         g1.addEdge(1, 5);
         g1.addEdge(1, 6);
@@ -54,7 +55,6 @@ public class MainTest {
         g1.addEdge(3, 5);
         g1.addEdge(3, 6);
 
-        Graph g2 = new AdjacencyList(false);
         g2.addEdge(1, 5);
         g2.addEdge(1, 4);
         g2.addEdge(1, 6);

@@ -23,6 +23,47 @@ public class GraphUtil {
      *     E - кол-во вершин.
      *     ui vi - ребро между указанными вершинами.
      *
+     * @param br - поток ввода (BufferedReader), из которого читаются данные графа.
+     * @param g - объект графа.
+     *
+     * @throws IOException - если файл не удаётся открыть, прочитать или формат файла некорректен.
+     *                       В частности, выбрасывается, если файл закончился раньше времени или
+     *                       строка с ребром имеет неверный формат.
+     */
+    public static void loadFromFile(BufferedReader br, Graph g) throws IOException {
+        String firstLine = br.readLine();
+        if (firstLine == null) {
+            throw new IOException("Неверный формат: отсутствует строка с количеством вершин/рёбер");
+        }
+
+        String[] parts = firstLine.trim().split("\\s+");
+        if (parts.length != 2) {
+            throw new IOException("Неверный формат: требуется 2 числа (V и E)");
+        }
+
+        int v = Integer.parseInt(parts[0]);
+        int e = Integer.parseInt(parts[1]);
+
+        for (int i = 0; i < e; i++) {
+            String line = br.readLine();
+            if (line == null) {
+                throw new IOException("Неверный формат: отсутствует описание ребра №" + (i + 1));
+            }
+
+            String[] uv = line.trim().split("\\s+");
+            if (uv.length != 2) {
+                throw new IOException("Неверный формат: строки должны содержать два целых числа");
+            }
+
+            int u = Integer.parseInt(uv[0]);
+            int w = Integer.parseInt(uv[1]);
+            g.addEdge(u, w);
+        }
+    }
+
+    /**
+     * "Обёрточный" метод.
+     *
      * @param path - путь к файлу.
      * @param g - объект графа.
      *
@@ -32,22 +73,7 @@ public class GraphUtil {
      */
     public static void loadFromFile(String path, Graph g) throws IOException {
         try (BufferedReader br = new BufferedReader(new FileReader(path))) {
-            String[] parts = br.readLine().trim().split("\\s+");
-            int V = Integer.parseInt(parts[0]);
-            int E = Integer.parseInt(parts[1]);
-
-            for (int i = 0; i < E; i++) {
-                String line = br.readLine();
-                if (line == null) {
-                    throw new IOException("Внезапный конец файла");
-                }
-
-                String[] uv = line.trim().split("\\s+");
-                int u = Integer.parseInt(uv[0]);
-                int v = Integer.parseInt(uv[1]);
-
-                g.addEdge(u, v);
-            }
+            loadFromFile(br, g);
         }
     }
 
@@ -92,20 +118,20 @@ public class GraphUtil {
      *
      * @param g1 - первый граф
      * @param g2 - второй граф
-     * @param L1 - список вершин первого графа
-     * @param L2 - список вершин второго графа
+     * @param l1 - список вершин первого графа
+     * @param l2 - список вершин второго графа
      * @param perm - перестановка индексов L2, задающая отображение вершин
      * @return - true если отображение изоморфно, иначе false.
      */
     private static boolean checkMapping(Graph g1, Graph g2,
-                                        List<Integer> L1, List<Integer> L2,
+                                        List<Integer> l1, List<Integer> l2,
                                         int[] perm) {
         Map<Integer, Integer> map = new HashMap<>();
-        for (int i = 0; i < L1.size(); i++) {
-            map.put(L1.get(i), L2.get(perm[i]));
+        for (int i = 0; i < l1.size(); i++) {
+            map.put(l1.get(i), l2.get(perm[i]));
         }
 
-        for (int u : L1) {
+        for (int u : l1) {
             for (int v : g1.getNeighbors(u)) {
                 int u2 = map.get(u);
                 int v2 = map.get(v);

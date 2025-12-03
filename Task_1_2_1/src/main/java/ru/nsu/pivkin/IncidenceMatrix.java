@@ -106,15 +106,15 @@ public class IncidenceMatrix implements Graph {
         int size = vertices.size();
         int[] col = new int[size]; // новый столбец
 
-        int iFrom = indexOf(from);
-        int iTo = indexOf(to);
+        int ifrom = indexOf(from);
+        int ito = indexOf(to);
 
         if (directed) {
-            col[iFrom] = -1;
-            col[iTo] = 1;
+            col[ifrom] = -1;
+            col[ito] = 1;
         } else {
-            col[iFrom] = 1;
-            col[iTo] = 1;
+            col[ifrom] = 1;
+            col[ito] = 1;
         }
 
         edges.add(col);
@@ -130,10 +130,10 @@ public class IncidenceMatrix implements Graph {
      */
     @Override
     public boolean removeEdge(int from, int to) {
-        int iFrom = indexOf(from);
-        int iTo = indexOf(to);
+        int ifrom = indexOf(from);
+        int ito = indexOf(to);
 
-        if (iFrom == -1 || iTo == -1) {
+        if (ifrom == -1 || ito == -1) {
             return false;
         }
 
@@ -141,12 +141,12 @@ public class IncidenceMatrix implements Graph {
             int[] col = edges.get(i);
 
             if (directed) {
-                if (col[iFrom] == -1 && col[iTo] == 1) {
+                if (col[ifrom] == -1 && col[ito] == 1) {
                     edges.remove(i);
                     return true;
                 }
             } else {
-                if (col[iFrom] == 1 && col[iTo] == 1) {
+                if (col[ifrom] == 1 && col[ito] == 1) {
                     edges.remove(i);
                     return true;
                 }
@@ -240,7 +240,7 @@ public class IncidenceMatrix implements Graph {
 
             int idx = indexOf(v);
             for (int[] col : edges) {
-                if(col[idx] >= 0) {
+                if (col[idx] >= 0) {
                     sb.append(" ");
                 }
                 sb.append(col[idx]).append(" ");
@@ -264,6 +264,24 @@ public class IncidenceMatrix implements Graph {
         }
 
         return GraphUtil.isIsomorphic(this, other);
+    }
+
+    /**
+     * Возвращает хеш-код графа.
+     *
+     * @return - хеш-код, основанный на отсортированном списке степеней вершин графа.
+     */
+    @Override
+    public int hashCode() {
+        List<Integer> vertices = getVertices();
+        List<Integer> degrees = new ArrayList<>();
+
+        for (int v : vertices) {
+            degrees.add(getNeighbors(v).size());
+        }
+
+        Collections.sort(degrees);
+        return degrees.hashCode();
     }
 
     /**
