@@ -1,12 +1,15 @@
 package ru.nsu.pivkin;
 
-import org.junit.jupiter.api.Test;
 import java.util.List;
+import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 /**
- * Тесты для класса AdjacencyList
+ * Тесты для класса AdjacencyList.
  */
 class AdjacencyListTest {
 
@@ -108,7 +111,7 @@ class AdjacencyListTest {
         Graph g2 = new AdjacencyList(true);
         g2.addEdge(4, 5);
         g2.addEdge(5, 6);
-        
+
         assertEquals(g1.hashCode(), g2.hashCode());
     }
 
