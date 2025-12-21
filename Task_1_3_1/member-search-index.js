@@ -1,0 +1,1 @@
+memberSearchIndex = [{"p":"ru.nsu.pivkin","c":"SubFinder","l":"find(String, String)","u":"find(java.lang.String,java.lang.String)"},{"p":"ru.nsu.pivkin","c":"SubFinder","l":"find(String, String, Integer)","u":"find(java.lang.String,java.lang.String,java.lang.Integer)"},{"p":"ru.nsu.pivkin","c":"SubFinder","l":"SubFinder()","u":"%3Cinit%3E()"}];updateSearchResults();
