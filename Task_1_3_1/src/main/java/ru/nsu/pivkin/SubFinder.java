@@ -38,7 +38,7 @@ public final class SubFinder {
      * @throws RuntimeException - если возникает ошибка при чтении файла.
      */
     public static List<Integer> find(BufferedReader reader, String substring, Integer bufferSize) throws IOException {
-        List <Integer> res = new ArrayList<>();
+        List<Integer> res = new ArrayList<>();
 
         if (bufferSize < substring.length()) {
             throw new IllegalArgumentException("Buffer size can't be less than substring size.");
@@ -50,7 +50,7 @@ public final class SubFinder {
 
         StringBuilder buffer = new StringBuilder();
         char[] charBuffer = new char[bufferSize];
-        int posCP = 0;
+        int posCodePoint = 0;
         int charsRead;
 
         while ((charsRead = reader.read(charBuffer)) != -1) {
@@ -64,19 +64,19 @@ public final class SubFinder {
                     break;
                 }
 
-                int indexCP = posCP + text.codePointCount(0, charIndex);
-                if(!res.contains(indexCP)) {
-                    res.add(indexCP);
+                int indexCodePoint = posCodePoint + text.codePointCount(0, charIndex);
+                if (!res.contains(indexCodePoint)) {
+                    res.add(indexCodePoint);
                 }
 
                 fromIndex = charIndex + 1;
             }
 
             int keepChars = Math.max(0, buffer.length() - substring.length());
-            int readedCP = buffer.substring(0, keepChars).codePointCount(0, keepChars);
+            int readedCodePoint = buffer.substring(0, keepChars).codePointCount(0, keepChars);
 
             buffer.delete(0, keepChars);
-            posCP += readedCP;
+            posCodePoint += readedCodePoint;
         }
 
         return res;

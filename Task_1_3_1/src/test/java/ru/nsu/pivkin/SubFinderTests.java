@@ -37,15 +37,18 @@ public class SubFinderTests {
 
     @Test
     void testDifferentBufferSizes() throws Exception {
-        try (FileWriter writer = new FileWriter(tempDir+"/test1.txt", StandardCharsets.UTF_8)) {
+        try (FileWriter writer = new FileWriter(tempDir + "/test1.txt", StandardCharsets.UTF_8)) {
             for (int i = 0; i < 10; i++) {
                 writer.write("абракадабра");
             }
         }
 
-        List<Integer> result1 = SubFinder.find(new BufferedReader(new FileReader(tempDir+"/test1.txt", StandardCharsets.UTF_8)), "бра", 8); // 1 byte
-        List<Integer> result2 = SubFinder.find(new BufferedReader(new FileReader(tempDir+"/test1.txt", StandardCharsets.UTF_8)), "бра"); // default size - 1 KB
-        List<Integer> result3 = SubFinder.find(new BufferedReader(new FileReader(tempDir+"/test1.txt", StandardCharsets.UTF_8)), "бра", 8 * 1024); // 8 KB
+        List<Integer> result1 = SubFinder.find(new BufferedReader(new FileReader(
+                tempDir + "/test1.txt", StandardCharsets.UTF_8)), "бра", 8); // 1 byte
+        List<Integer> result2 = SubFinder.find(new BufferedReader(new FileReader(
+                tempDir + "/test1.txt", StandardCharsets.UTF_8)), "бра"); // default size - 1 KB
+        List<Integer> result3 = SubFinder.find(new BufferedReader(new FileReader(
+                tempDir + "/test1.txt", StandardCharsets.UTF_8)), "бра", 8 * 1024); // 8 KB
 
         assertEquals(result1, result2);
         assertEquals(result2, result3);
@@ -53,34 +56,37 @@ public class SubFinderTests {
 
     @Test
     void testCatchingExceptions() throws Exception {
-        try (FileWriter writer = new FileWriter(tempDir+"/test2.txt", StandardCharsets.UTF_8)) {
+        try (FileWriter writer = new FileWriter(tempDir + "/test2.txt", StandardCharsets.UTF_8)) {
             for (int i = 0; i < 10; i++) {
                 writer.write("абракадабра");
             }
         }
-        assertThrows(IllegalArgumentException.class, () -> SubFinder.find(new BufferedReader(new FileReader(tempDir+"/test2.txt", StandardCharsets.UTF_8)), "бра", 1));
+        assertThrows(IllegalArgumentException.class, () -> SubFinder.find(new BufferedReader(
+                new FileReader(tempDir + "/test2.txt", StandardCharsets.UTF_8)), "бра", 1));
     }
 
     @Test
     void testProbablyBigSize() throws Exception {
         int fileSize = 1000;
-        try (FileWriter writer = new FileWriter(tempDir+"/test3.txt", StandardCharsets.UTF_8)) {
+        try (FileWriter writer = new FileWriter(tempDir + "/test3.txt", StandardCharsets.UTF_8)) {
             for (int i = 0; i < fileSize; i++) {
                 writer.write("абракадабру");
             }
         }
 
-        List<Integer> result = SubFinder.find(new BufferedReader(new FileReader(tempDir+"/test3.txt", StandardCharsets.UTF_8)), "бра");
+        List<Integer> result = SubFinder.find(new BufferedReader(new FileReader(
+                tempDir + "/test3.txt", StandardCharsets.UTF_8)), "бра");
         assertEquals(fileSize, result.size());
     }
 
     @Test
     void testSurrogatePairs() throws Exception {
         String smile = "\uD83D\uDE00\uD83D\uDE00\uD83D\uDE00";
-        List<Integer> result = SubFinder.find(new BufferedReader(new StringReader(smile)), "\uD83D\uDE00");
+        List<Integer> result = SubFinder.find(new BufferedReader(
+                new StringReader(smile)), "\uD83D\uDE00");
         System.out.println(smile);
         System.out.println("\uD83D\uDE00");
-        assertEquals(List.of(0,1,2), result);
+        assertEquals(List.of(0, 1, 2), result);
     }
 
 }
