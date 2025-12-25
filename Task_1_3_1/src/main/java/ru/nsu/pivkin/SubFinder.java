@@ -1,11 +1,7 @@
 package ru.nsu.pivkin;
 
 import java.io.BufferedReader;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,7 +17,7 @@ public final class SubFinder {
     /**
      * Находит все вхождения подстроки в файле с использованием фиксированного размера буфера.
      *
-     * @param filename - путь к файлу.
+     * @param reader - buffered reader.
      * @param substring - подстрока.
      * @return - список индексов всех вхождений.
      * @throws IllegalArgumentException - если размер буфера меньше длины подстроки.
@@ -34,7 +30,7 @@ public final class SubFinder {
     /**
      * Находит все вхождения подстроки в файле с использованием указанного размера буфера.
      *
-     * @param filename - путь к файлу.
+     * @param reader - bufferd reader.
      * @param substring - подстрока.
      * @param bufferSize - размер буфера для чтения файла.
      * @return - список индексов всех вхождений.
@@ -54,29 +50,33 @@ public final class SubFinder {
 
         StringBuilder buffer = new StringBuilder();
         char[] charBuffer = new char[bufferSize];
-        int pos = 0;
+        int posCP = 0;
+        int charsRead;
 
-        int bytesRead = reader.read(charBuffer, 0, charBuffer.length);
-        while (bytesRead != -1) {
-            buffer.append(charBuffer, 0, bytesRead);
-
+        while ((charsRead = reader.read(charBuffer)) != -1) {
+            buffer.append(charBuffer, 0, charsRead);
             String text = buffer.toString();
             int fromIndex = 0;
-            int index = text.indexOf(substring, fromIndex);
-            while (index != -1) {
-                if (!res.contains(pos + index)) {
-                    res.add(pos + index);
+
+            while (true) {
+                int charIndex = text.indexOf(substring, fromIndex);
+                if (charIndex == -1) {
+                    break;
                 }
 
-                fromIndex = index + 1;
-                index = text.indexOf(substring, fromIndex);
+                int indexCP = posCP + text.codePointCount(0, charIndex);
+                if(!res.contains(indexCP)) {
+                    res.add(indexCP);
+                }
+
+                fromIndex = charIndex + 1;
             }
 
             int keepChars = Math.max(0, buffer.length() - substring.length());
-            buffer.delete(0, keepChars);
-            pos += keepChars;
+            int readedCP = buffer.substring(0, keepChars).codePointCount(0, keepChars);
 
-            bytesRead = reader.read(charBuffer, 0, charBuffer.length);
+            buffer.delete(0, keepChars);
+            posCP += readedCP;
         }
 
         return res;
