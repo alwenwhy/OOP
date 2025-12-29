@@ -1,16 +1,13 @@
 package ru.nsu.pivkin;
 
+import java.util.Objects;
+
 /**
- * Класс для представления простого текста в Markdown.
+ * Простой текст в Markdown.
  */
-public final class Text extends Element {
+public final class Text extends AbstractElement {
     private final String content;
 
-    /**
-     * Приватный конструктор.
-     *
-     * @param content - текст.
-     */
     private Text(String content) {
         this.content = content;
     }
@@ -31,7 +28,7 @@ public final class Text extends Element {
      * @param sb - StringBuilder для записи результата.
      */
     @Override
-    protected void render(StringBuilder sb) {
+    public void render(StringBuilder sb) {
         sb.append(content);
     }
 
@@ -43,7 +40,7 @@ public final class Text extends Element {
      */
     @Override
     public boolean equals(Object o) {
-        return o instanceof Text t && eq(content, t.content);
+        return o instanceof Text t && Objects.equals(content, t.content);
     }
 
     /**

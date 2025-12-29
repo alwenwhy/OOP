@@ -3,20 +3,14 @@ package ru.nsu.pivkin;
 import java.util.Objects;
 
 /**
- * Класс для форматирования текста в Markdown.
+ * Форматированный текст в Markdown.
  * Поддерживает жирный, курсивный, зачёркнутый текста и "однолинейный" код.
  */
-public final class Format extends Element {
+public final class FormattedText extends AbstractElement {
     private final String mark;
     private final Element elem;
 
-    /**
-     * Приватный конструктор.
-     *
-     * @param mark - символ форматирования.
-     * @param elem - элемент для форматирования.
-     */
-    private Format(String mark, Element elem) {
+    private FormattedText(String mark, Element elem) {
         this.mark = mark;
         this.elem = elem;
     }
@@ -27,8 +21,8 @@ public final class Format extends Element {
      * @param e - элемент.
      * @return - элемент с жирным текстом.
      */
-    public static Format bold(Element e) {
-        return new Format("**", e);
+    public static FormattedText bold(Element e) {
+        return new FormattedText("**", e);
     }
 
     /**
@@ -37,8 +31,8 @@ public final class Format extends Element {
      * @param e - элемент.
      * @return - элемент с курсивным текстом.
      */
-    public static Format italic(Element e) {
-        return new Format("*", e);
+    public static FormattedText italic(Element e) {
+        return new FormattedText("*", e);
     }
 
     /**
@@ -47,8 +41,8 @@ public final class Format extends Element {
      * @param e - элемент.
      * @return - элемент с зачёркнутым текстом.
      */
-    public static Format strike(Element e) {
-        return new Format("~~", e);
+    public static FormattedText strike(Element e) {
+        return new FormattedText("~~", e);
     }
 
     /**
@@ -57,8 +51,8 @@ public final class Format extends Element {
      * @param e - элемент.
      * @return - элемент с "однолинейным" кодом.
      */
-    public static Format code(Element e) {
-        return new Format("`", e);
+    public static FormattedText code(Element e) {
+        return new FormattedText("`", e);
     }
 
     /**
@@ -67,7 +61,7 @@ public final class Format extends Element {
      * @param sb - StringBuilder для записи результата.
      */
     @Override
-    protected void render(StringBuilder sb) {
+    public void render(StringBuilder sb) {
         sb.append(mark);
         elem.render(sb);
         sb.append(mark);
@@ -81,9 +75,9 @@ public final class Format extends Element {
      */
     @Override
     public boolean equals(Object o) {
-        return o instanceof Format f
-                && eq(mark, f.mark)
-                && eq(elem, f.elem);
+        return o instanceof FormattedText f
+                && Objects.equals(mark, f.mark)
+                && Objects.equals(elem, f.elem);
     }
 
     /**

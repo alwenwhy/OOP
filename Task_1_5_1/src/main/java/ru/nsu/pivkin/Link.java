@@ -1,18 +1,14 @@
 package ru.nsu.pivkin;
 
+import java.util.Objects;
+
 /**
- * Класс для создания ссылок в Markdown.
+ * Ссылка в Markdown.
  */
-public class Link extends Element {
+public class Link extends AbstractElement {
     protected final String content;
     protected final String url;
 
-    /**
-     * Приватный конструктор.
-     *
-     * @param content - текст ссылки.
-     * @param url - ссылка.
-     */
     protected Link(String content, String url) {
         this.content = content;
         this.url = url;
@@ -35,8 +31,20 @@ public class Link extends Element {
      * @param sb - StringBuilder для записи результата.
      */
     @Override
-    protected void render(StringBuilder sb) {
+    public void render(StringBuilder sb) {
         sb.append('[').append(content).append(']')
                 .append('(').append(url).append(')');
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        return obj instanceof Link o
+                && Objects.equals(this.content, o.content)
+                && Objects.equals(this.url, o.url);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(content, url);
     }
 }

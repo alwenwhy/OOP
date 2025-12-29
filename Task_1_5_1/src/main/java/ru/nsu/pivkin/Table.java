@@ -3,33 +3,18 @@ package ru.nsu.pivkin;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 
 /**
- * Класс для создания таблиц в Markdown.
+ * Таблица в Markdown.
  * Поддерживает выравнивание столбцов.
  * Для создания элемента таблицы используйте Builder.
  */
-public final class Table extends Element {
-    /**
-     * Перечисление вариантов выравнивания столбцов.
-     */
-    public enum Align {
-        LEFT,   // по левому краю
-        RIGHT,  // по правому краю
-        CENTER  // по центру
-    }
-
+public final class Table extends AbstractElement {
     private final List<String> header;
     private final List<Align> aligns;
     private final List<List<String>> rows;
 
-    /**
-     * Приватный конструктор.
-     *
-     * @param header - заголовки столбцов.
-     * @param aligns - выравнивания для каждого столбца.
-     * @param rows - строки таблицы.
-     */
     private Table(List<String> header, List<Align> aligns, List<List<String>> rows) {
         this.header = header;
         this.aligns = aligns;
@@ -42,7 +27,7 @@ public final class Table extends Element {
      * @param sb - StringBuilder для записи результата.
      */
     @Override
-    protected void render(StringBuilder sb) {
+    public void render(StringBuilder sb) {
         int cols = header.size();
         int[] widths = computeWidths(cols);
 
@@ -51,6 +36,19 @@ public final class Table extends Element {
         for (List<String> row : rows) {
             renderRow(sb, row, widths, aligns);
         }
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        return obj instanceof Table o
+                && Objects.equals(this.header, o.header)
+                && Objects.equals(this.aligns, o.aligns)
+                && Objects.equals(this.rows, o.rows);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(header, aligns, rows);
     }
 
     /**
@@ -219,6 +217,15 @@ public final class Table extends Element {
                     List.copyOf(rows)
             );
         }
+    }
+
+    /**
+     * Перечисление вариантов выравнивания столбцов.
+     */
+    public enum Align {
+        LEFT,   // по левому краю
+        RIGHT,  // по правому краю
+        CENTER  // по центру
     }
 }
 

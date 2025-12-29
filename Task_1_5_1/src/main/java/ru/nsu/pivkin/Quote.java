@@ -1,16 +1,13 @@
 package ru.nsu.pivkin;
 
+import java.util.Objects;
+
 /**
- * Класс для создания цитат в Markdown.
+ * Цитата в Markdown.
  */
-public final class Quote extends Element {
+public final class Quote extends AbstractElement {
     private final Element content;
 
-    /**
-     * Приватный конструктор.
-     *
-     * @param content - содержимое цитаты.
-     */
     private Quote(Element content) {
         this.content = content;
     }
@@ -31,7 +28,7 @@ public final class Quote extends Element {
      * @param sb - StringBuilder для записи результата.
      */
     @Override
-    protected void render(StringBuilder sb) {
+    public void render(StringBuilder sb) {
         sb.append("> ");
         content.render(sb);
     }
@@ -44,7 +41,7 @@ public final class Quote extends Element {
      */
     @Override
     public boolean equals(Object o) {
-        return o instanceof Quote q && eq(content, q.content);
+        return o instanceof Quote q && Objects.equals(content, q.content);
     }
 
     /**
@@ -54,6 +51,6 @@ public final class Quote extends Element {
      */
     @Override
     public int hashCode() {
-        return content.hashCode() * 17;
+        return Objects.hash(content);
     }
 }

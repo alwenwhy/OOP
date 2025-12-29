@@ -2,23 +2,18 @@ package ru.nsu.pivkin;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 /**
- * Класс для создания списков в Markdown.
+ * Список в Markdown.
  * Поддерживаются нумерованный и маркированные списки.
  * Для создания элемента списка используйте Builder.
  */
-public final class ListElement extends Element {
+public final class MarkdownList extends AbstractElement {
     private final boolean ordered;
     private final List<Element> content;
 
-    /**
-     * Приватный конструктор.
-     *
-     * @param ordered - true для нумерованного списка, false для маркированного.
-     * @param content - элементы списка.
-     */
-    private ListElement(boolean ordered, List<Element> content) {
+    private MarkdownList(boolean ordered, List<Element> content) {
         this.ordered = ordered;
         this.content = content;
     }
@@ -29,7 +24,7 @@ public final class ListElement extends Element {
      * @param sb - StringBuilder для записи результата.
      */
     @Override
-    protected void render(StringBuilder sb) {
+    public void render(StringBuilder sb) {
         for (int i = 0; i < content.size(); i++){
             sb.append(ordered ? (i + 1) + ". " : "* ");
             content.get(i).render(sb);
@@ -37,11 +32,23 @@ public final class ListElement extends Element {
         }
     }
 
+    @Override
+    public boolean equals(Object obj) {
+        return obj instanceof MarkdownList o
+                && Objects.equals(this.content, o.content)
+                && Objects.equals(this.ordered, o.ordered);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(content, ordered);
+    }
+
     /**
-     * Builder для создания элемента списка.
+     * Builder для создания списка.
      */
     public static class Builder {
-        private boolean ordered;
+        private boolean ordered = false;
         private final List<Element> content = new ArrayList<>();
 
         /**
@@ -69,8 +76,8 @@ public final class ListElement extends Element {
          *
          * @return - новый объект ListElement.
          */
-        public ListElement build() {
-            return new ListElement(ordered, List.copyOf(content));
+        public MarkdownList build() {
+            return new MarkdownList(ordered, List.copyOf(content));
         }
     }
 }

@@ -3,25 +3,14 @@ package ru.nsu.pivkin;
 import java.util.Objects;
 
 /**
- * Класс для создания заголовков в Markdown.
+ * Заголовок в Markdown.
  * Поддерживаются заголовки размеров от 1 до 6.
  */
-public final class Header extends Element {
+public final class Header extends AbstractElement {
     private final int size;
     private final Element content;
 
-    /**
-     * Приватный конструктор.
-     *
-     * @param size - размер заголовка (1 - 6).
-     * @param content - его содержимое.
-     * @throws IllegalArgumentException - если размер не в диапазоне [1, 6].
-     */
     private Header(int size, Element content) {
-        if (size < 1 || size > 6) {
-            throw new IllegalArgumentException("Header size must be in [1, 6]");
-        }
-
         this.size = size;
         this.content = content;
     }
@@ -35,6 +24,9 @@ public final class Header extends Element {
      * @throws IllegalArgumentException - если размер не в диапазоне [1, 6].
      */
     public static Header of(int size, Element content) {
+        if (size < 1 || size > 6) {
+            throw new IllegalArgumentException("Header size must be in [1, 6]");
+        }
         return new Header(size, content);
     }
 
@@ -44,11 +36,8 @@ public final class Header extends Element {
      * @param sb - StringBuilder для записи результата.
      */
     @Override
-    protected void render(StringBuilder sb) {
-        for (int i = 0; i < size; i++) {
-            sb.append('#');
-        }
-
+    public void render(StringBuilder sb) {
+        sb.append("#".repeat(Math.max(0, size)));
         sb.append(' ');
         content.render(sb);
     }
@@ -63,7 +52,7 @@ public final class Header extends Element {
     public boolean equals(Object o) {
         return o instanceof Header h
                 && size == h.size
-                && eq(content, h.content);
+                && Objects.equals(content, h.content);
     }
 
     /**

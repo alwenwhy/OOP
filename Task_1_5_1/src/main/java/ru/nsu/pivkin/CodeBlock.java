@@ -1,25 +1,21 @@
 package ru.nsu.pivkin;
 
+import java.util.Objects;
+
 /**
- * Класс для представления блоков кода в Markdown.
+ * Блок кода в Markdown.
  */
-public final class CodeBlock extends Element {
+public final class CodeBlock extends AbstractElement {
     private final String lang;
     private final String code;
 
-    /**
-     * Приватный конструктор.
-     *
-     * @param lang - язык программирования.
-     * @param code - исходный код.
-     */
     private CodeBlock(String lang, String code) {
         this.lang = lang;
         this.code = code;
     }
 
     /**
-     * Создаёт элемент блока кода.
+     * Создать элемент блока кода.
      *
      * @param lang - язык программирования.
      * @param code - исходный код.
@@ -35,9 +31,21 @@ public final class CodeBlock extends Element {
      * @param sb - StringBuilder для записи результата.
      */
     @Override
-    protected void render(StringBuilder sb) {
+    public void render(StringBuilder sb) {
         sb.append("```").append(lang).append('\n')
                 .append(code).append('\n')
                 .append("```");
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        return obj instanceof CodeBlock o
+                && Objects.equals(this.code, o.code)
+                && Objects.equals(this.lang, o.lang);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(this.code, this.lang);
     }
 }
