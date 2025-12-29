@@ -70,15 +70,19 @@ loadScripts(document, 'script');</script>
 <h1 title="Class Quote" class="title">Class Quote</h1>
 </div>
 <div class="inheritance" title="Inheritance Tree"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">java.lang.Object</a>
-<div class="inheritance"><a href="Element.html" title="class in ru.nsu.pivkin">ru.nsu.pivkin.Element</a>
+<div class="inheritance"><a href="AbstractElement.html" title="class in ru.nsu.pivkin">ru.nsu.pivkin.AbstractElement</a>
 <div class="inheritance">ru.nsu.pivkin.Quote</div>
 </div>
 </div>
 <section class="class-description" id="class-description">
+<dl class="notes">
+<dt>All Implemented Interfaces:</dt>
+<dd><code><a href="Element.html" title="interface in ru.nsu.pivkin">Element</a></code></dd>
+</dl>
 <hr>
 <div class="type-signature"><span class="modifiers">public final class </span><span class="element-name type-name-label">Quote</span>
-<span class="extends-implements">extends <a href="Element.html" title="class in ru.nsu.pivkin">Element</a></span></div>
-<div class="block">Класс для создания цитат в Markdown.</div>
+<span class="extends-implements">extends <a href="AbstractElement.html" title="class in ru.nsu.pivkin">AbstractElement</a></span></div>
+<div class="block">Цитата в Markdown.</div>
 </section>
 <section class="summary">
 <ul class="summary-list">
@@ -104,11 +108,11 @@ loadScripts(document, 'script');</script>
 <div class="block">Возвращает хэщ-код элемента.</div>
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static <a href="Quote.html" title="class in ru.nsu.pivkin">Quote</a></code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#of(ru.nsu.pivkin.Element)" class="member-name-link">of</a><wbr>(<a href="Element.html" title="class in ru.nsu.pivkin">Element</a>&nbsp;content)</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#of(ru.nsu.pivkin.Element)" class="member-name-link">of</a><wbr>(<a href="Element.html" title="interface in ru.nsu.pivkin">Element</a>&nbsp;content)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
 <div class="block">Создаёт элемент цитаты.</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>protected void</code></div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#render(java.lang.StringBuilder)" class="member-name-link">render</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/StringBuilder.html" title="class or interface in java.lang" class="external-link">StringBuilder</a>&nbsp;sb)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Рендер элемента в Markdown-формате в указанный StringBuilder.</div>
@@ -117,8 +121,8 @@ loadScripts(document, 'script');</script>
 </div>
 </div>
 <div class="inherited-list">
-<h3 id="methods-inherited-from-class-ru.nsu.pivkin.Element">Methods inherited from class&nbsp;ru.nsu.pivkin.<a href="Element.html" title="class in ru.nsu.pivkin">Element</a></h3>
-<code><a href="Element.html#eq(java.lang.Object,java.lang.Object)">eq</a>, <a href="Element.html#mdFormat()">mdFormat</a>, <a href="Element.html#toString()">toString</a></code></div>
+<h3 id="methods-inherited-from-class-ru.nsu.pivkin.AbstractElement">Methods inherited from class&nbsp;ru.nsu.pivkin.<a href="AbstractElement.html" title="class in ru.nsu.pivkin">AbstractElement</a></h3>
+<code><a href="AbstractElement.html#toString()">toString</a></code></div>
 <div class="inherited-list">
 <h3 id="methods-inherited-from-class-java.lang.Object">Methods inherited from class&nbsp;java.lang.<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a></h3>
 <code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html#clone()" title="class or interface in java.lang" class="external-link">clone</a>, <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html#finalize()" title="class or interface in java.lang" class="external-link">finalize</a>, <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html#getClass()" title="class or interface in java.lang" class="external-link">getClass</a>, <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html#notify()" title="class or interface in java.lang" class="external-link">notify</a>, <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html#notifyAll()" title="class or interface in java.lang" class="external-link">notifyAll</a>, <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html#wait()" title="class or interface in java.lang" class="external-link">wait</a>, <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html#wait(long)" title="class or interface in java.lang" class="external-link">wait</a>, <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html#wait(long,int)" title="class or interface in java.lang" class="external-link">wait</a></code></div>
@@ -136,7 +140,7 @@ loadScripts(document, 'script');</script>
 <li>
 <section class="detail" id="of(ru.nsu.pivkin.Element)">
 <h3>of</h3>
-<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type"><a href="Quote.html" title="class in ru.nsu.pivkin">Quote</a></span>&nbsp;<span class="element-name">of</span><wbr><span class="parameters">(<a href="Element.html" title="class in ru.nsu.pivkin">Element</a>&nbsp;content)</span></div>
+<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type"><a href="Quote.html" title="class in ru.nsu.pivkin">Quote</a></span>&nbsp;<span class="element-name">of</span><wbr><span class="parameters">(<a href="Element.html" title="interface in ru.nsu.pivkin">Element</a>&nbsp;content)</span></div>
 <div class="block">Создаёт элемент цитаты.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
@@ -149,11 +153,9 @@ loadScripts(document, 'script');</script>
 <li>
 <section class="detail" id="render(java.lang.StringBuilder)">
 <h3>render</h3>
-<div class="member-signature"><span class="modifiers">protected</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">render</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/StringBuilder.html" title="class or interface in java.lang" class="external-link">StringBuilder</a>&nbsp;sb)</span></div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">render</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/StringBuilder.html" title="class or interface in java.lang" class="external-link">StringBuilder</a>&nbsp;sb)</span></div>
 <div class="block">Рендер элемента в Markdown-формате в указанный StringBuilder.</div>
 <dl class="notes">
-<dt>Specified by:</dt>
-<dd><code><a href="Element.html#render(java.lang.StringBuilder)">render</a></code>&nbsp;in class&nbsp;<code><a href="Element.html" title="class in ru.nsu.pivkin">Element</a></code></dd>
 <dt>Parameters:</dt>
 <dd><code>sb</code> - - StringBuilder для записи результата.</dd>
 </dl>
@@ -165,8 +167,8 @@ loadScripts(document, 'script');</script>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name">equals</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a>&nbsp;o)</span></div>
 <div class="block">Сравнивает данный элемент форматирования с другим объектом.</div>
 <dl class="notes">
-<dt>Overrides:</dt>
-<dd><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html#equals(java.lang.Object)" title="class or interface in java.lang" class="external-link">equals</a></code>&nbsp;in class&nbsp;<code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a></code></dd>
+<dt>Specified by:</dt>
+<dd><code><a href="AbstractElement.html#equals(java.lang.Object)">equals</a></code>&nbsp;in class&nbsp;<code><a href="AbstractElement.html" title="class in ru.nsu.pivkin">AbstractElement</a></code></dd>
 <dt>Parameters:</dt>
 <dd><code>o</code> - - объект для сравнения.</dd>
 <dt>Returns:</dt>
@@ -180,8 +182,8 @@ loadScripts(document, 'script');</script>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">int</span>&nbsp;<span class="element-name">hashCode</span>()</div>
 <div class="block">Возвращает хэщ-код элемента.</div>
 <dl class="notes">
-<dt>Overrides:</dt>
-<dd><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html#hashCode()" title="class or interface in java.lang" class="external-link">hashCode</a></code>&nbsp;in class&nbsp;<code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a></code></dd>
+<dt>Specified by:</dt>
+<dd><code><a href="AbstractElement.html#hashCode()">hashCode</a></code>&nbsp;in class&nbsp;<code><a href="AbstractElement.html" title="class in ru.nsu.pivkin">AbstractElement</a></code></dd>
 <dt>Returns:</dt>
 <dd>- хэш-код элемента.</dd>
 </dl>
