@@ -77,7 +77,7 @@ class ElementTest {
         Text text = Text.of("Cogito ergo sum");
         Quote quote = Quote.of(text);
         System.out.println(quote.hashCode());
-        assertEquals("> Cogito ergo sum", quote);
+        assertEquals("> Cogito ergo sum", quote.toString());
         assertEquals(Quote.of(text), quote);
     }
 
