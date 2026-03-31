@@ -1,0 +1,9 @@
+Type;Time_ns
+Sequential;303209
+Thread(1);2461248
+Thread(2);636824
+Thread(4);1415967
+Thread(8);397616
+Thread(16);558007
+Thread(32);1127105
+ParallelStream;2657376
