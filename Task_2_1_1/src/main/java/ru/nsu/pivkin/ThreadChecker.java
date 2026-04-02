@@ -28,7 +28,7 @@ public class ThreadChecker implements PrimeChecker {
 
             Thread thread = new Thread(() -> {
                 for (int j = start; j < end && !found.get(); j++) {
-                    if (!isPrime(numbers.get(j))) {
+                    if (!CheckerUtil.isPrime(numbers.get(j))) {
                         found.set(true);
                         break;
                     }
@@ -54,21 +54,5 @@ public class ThreadChecker implements PrimeChecker {
     @Override
     public String getName() {
         return "ThreadPool(" + threads + ")";
-    }
-
-
-
-    private boolean isPrime(int n) {
-        if (n <= 1) {
-            return false;
-        }
-
-        for (int i = 2; i * i <= n; i++) {
-            if (n % i == 0) {
-                return false;
-            }
-        }
-
-        return true;
     }
 }
