@@ -8,15 +8,15 @@ import java.util.List;
 import java.util.Random;
 
 public class Main {
-    private static final int MEASUREMENTS = 50;
+    private static final int MEASUREMENTS = 100;
     private static final Random random = new Random(42);
 
     public static void main(String[] args) {
         TestCase[] tests = {
-                new TestCase("small_few", generateRandomNums(100, 100, 0.5)),
-                new TestCase("small_many", generateRandomNums(10000, 100, 0.5)),
-                new TestCase("large_few", generateRandomNums(100, 10000000, 0.3)),
-                new TestCase("large_many", generateRandomNums(10000, 10000000, 0.3))
+                new TestCase("small_few", generateRandomNums(100, 100, 1)),
+                new TestCase("small_many", generateRandomNums(10000, 100, 1)),
+                new TestCase("large_few", generateRandomNums(100, 10000000, 1)),
+                new TestCase("large_many", generateRandomNums(10000, 10000000, 1))
         };
 
         int[] threadCounts = {1, 2, 4, 8, 16, 32};
