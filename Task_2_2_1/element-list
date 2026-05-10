@@ -2,4 +2,5 @@ ru.nsu.pivkin
 ru.nsu.pivkin.config
 ru.nsu.pivkin.model
 ru.nsu.pivkin.service
+ru.nsu.pivkin.state
 ru.nsu.pivkin.thread

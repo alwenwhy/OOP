@@ -102,8 +102,8 @@ implements <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base
 <div class="summary-table two-column-summary">
 <div class="table-header col-first">Constructor</div>
 <div class="table-header col-last">Description</div>
-<div class="col-constructor-name even-row-color"><code><a href="#%3Cinit%3E(int,ru.nsu.pivkin.model.OrderStatus,java.lang.String,java.lang.String)" class="member-name-link">UnfinishedOrder</a><wbr>(int&nbsp;orderId,
- <a href="OrderStatus.html" title="enum class in ru.nsu.pivkin.model">OrderStatus</a>&nbsp;status,
+<div class="col-constructor-name even-row-color"><code><a href="#%3Cinit%3E(int,java.lang.String,java.lang.String,java.lang.String)" class="member-name-link">UnfinishedOrder</a><wbr>(int&nbsp;orderID,
+ <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;status,
  <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;bakerName,
  <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;courierName)</code></div>
 <div class="col-last even-row-color">
@@ -144,13 +144,20 @@ implements <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base
 <h2>Constructor Details</h2>
 <ul class="member-list">
 <li>
-<section class="detail" id="&lt;init&gt;(int,ru.nsu.pivkin.model.OrderStatus,java.lang.String,java.lang.String)">
+<section class="detail" id="&lt;init&gt;(int,java.lang.String,java.lang.String,java.lang.String)">
 <h3>UnfinishedOrder</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">UnfinishedOrder</span><wbr><span class="parameters">(int&nbsp;orderId,
- <a href="OrderStatus.html" title="enum class in ru.nsu.pivkin.model">OrderStatus</a>&nbsp;status,
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">UnfinishedOrder</span><wbr><span class="parameters">(int&nbsp;orderID,
+ <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;status,
  <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;bakerName,
  <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;courierName)</span></div>
 <div class="block">Конструктор незавершенного заказа.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>orderID</code> - - идентификатор заказа</dd>
+<dd><code>status</code> - - статус заказа (строка)</dd>
+<dd><code>bakerName</code> - - имя пекаря</dd>
+<dd><code>courierName</code> - - имя курьера</dd>
+</dl>
 </section>
 </li>
 </ul>

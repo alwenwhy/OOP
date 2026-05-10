@@ -54,6 +54,7 @@ loadScripts(document, 'script');</script>
 <li><a href="ru/nsu/pivkin/config/package-tree.html">ru.nsu.pivkin.config</a>, </li>
 <li><a href="ru/nsu/pivkin/model/package-tree.html">ru.nsu.pivkin.model</a>, </li>
 <li><a href="ru/nsu/pivkin/service/package-tree.html">ru.nsu.pivkin.service</a>, </li>
+<li><a href="ru/nsu/pivkin/state/package-tree.html">ru.nsu.pivkin.state</a>, </li>
 <li><a href="ru/nsu/pivkin/thread/package-tree.html">ru.nsu.pivkin.thread</a></li>
 </ul>
 </div>
@@ -64,14 +65,19 @@ loadScripts(document, 'script');</script>
 <ul>
 <li class="circle">ru.nsu.pivkin.thread.<a href="ru/nsu/pivkin/thread/Baker.html" class="type-name-link" title="class in ru.nsu.pivkin.thread">Baker</a> (implements java.lang.<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Runnable.html" title="class or interface in java.lang" class="external-link">Runnable</a>)</li>
 <li class="circle">ru.nsu.pivkin.service.<a href="ru/nsu/pivkin/service/BakeryService.html" class="type-name-link" title="class in ru.nsu.pivkin.service">BakeryService</a></li>
+<li class="circle">ru.nsu.pivkin.state.<a href="ru/nsu/pivkin/state/CompletedState.html" class="type-name-link" title="class in ru.nsu.pivkin.state">CompletedState</a> (implements ru.nsu.pivkin.state.<a href="ru/nsu/pivkin/state/OrderState.html" title="interface in ru.nsu.pivkin.state">OrderState</a>)</li>
 <li class="circle">ru.nsu.pivkin.config.<a href="ru/nsu/pivkin/config/ConfigLoader.html" class="type-name-link" title="class in ru.nsu.pivkin.config">ConfigLoader</a></li>
 <li class="circle">ru.nsu.pivkin.config.<a href="ru/nsu/pivkin/config/ConfigLoader.BakerConfig.html" class="type-name-link" title="class in ru.nsu.pivkin.config">ConfigLoader.BakerConfig</a></li>
 <li class="circle">ru.nsu.pivkin.config.<a href="ru/nsu/pivkin/config/ConfigLoader.BakeryConfig.html" class="type-name-link" title="class in ru.nsu.pivkin.config">ConfigLoader.BakeryConfig</a></li>
 <li class="circle">ru.nsu.pivkin.config.<a href="ru/nsu/pivkin/config/ConfigLoader.CourierConfig.html" class="type-name-link" title="class in ru.nsu.pivkin.config">ConfigLoader.CourierConfig</a></li>
+<li class="circle">ru.nsu.pivkin.state.<a href="ru/nsu/pivkin/state/CookingState.html" class="type-name-link" title="class in ru.nsu.pivkin.state">CookingState</a> (implements ru.nsu.pivkin.state.<a href="ru/nsu/pivkin/state/OrderState.html" title="interface in ru.nsu.pivkin.state">OrderState</a>)</li>
 <li class="circle">ru.nsu.pivkin.thread.<a href="ru/nsu/pivkin/thread/Courier.html" class="type-name-link" title="class in ru.nsu.pivkin.thread">Courier</a> (implements java.lang.<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Runnable.html" title="class or interface in java.lang" class="external-link">Runnable</a>)</li>
+<li class="circle">ru.nsu.pivkin.state.<a href="ru/nsu/pivkin/state/DeliveringState.html" class="type-name-link" title="class in ru.nsu.pivkin.state">DeliveringState</a> (implements ru.nsu.pivkin.state.<a href="ru/nsu/pivkin/state/OrderState.html" title="interface in ru.nsu.pivkin.state">OrderState</a>)</li>
+<li class="circle">ru.nsu.pivkin.state.<a href="ru/nsu/pivkin/state/InStorageState.html" class="type-name-link" title="class in ru.nsu.pivkin.state">InStorageState</a> (implements ru.nsu.pivkin.state.<a href="ru/nsu/pivkin/state/OrderState.html" title="interface in ru.nsu.pivkin.state">OrderState</a>)</li>
 <li class="circle">ru.nsu.pivkin.<a href="ru/nsu/pivkin/Main.html" class="type-name-link" title="class in ru.nsu.pivkin">Main</a></li>
 <li class="circle">ru.nsu.pivkin.model.<a href="ru/nsu/pivkin/model/Order.html" class="type-name-link" title="class in ru.nsu.pivkin.model">Order</a></li>
 <li class="circle">ru.nsu.pivkin.thread.<a href="ru/nsu/pivkin/thread/OrderGenerator.html" class="type-name-link" title="class in ru.nsu.pivkin.thread">OrderGenerator</a> (implements java.lang.<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Runnable.html" title="class or interface in java.lang" class="external-link">Runnable</a>)</li>
+<li class="circle">ru.nsu.pivkin.state.<a href="ru/nsu/pivkin/state/PendingState.html" class="type-name-link" title="class in ru.nsu.pivkin.state">PendingState</a> (implements ru.nsu.pivkin.state.<a href="ru/nsu/pivkin/state/OrderState.html" title="interface in ru.nsu.pivkin.state">OrderState</a>)</li>
 <li class="circle">ru.nsu.pivkin.model.<a href="ru/nsu/pivkin/model/Pizza.html" class="type-name-link" title="class in ru.nsu.pivkin.model">Pizza</a></li>
 <li class="circle">ru.nsu.pivkin.service.<a href="ru/nsu/pivkin/service/StorageService.html" class="type-name-link" title="class in ru.nsu.pivkin.service">StorageService</a></li>
 <li class="circle">ru.nsu.pivkin.model.<a href="ru/nsu/pivkin/model/UnfinishedOrder.html" class="type-name-link" title="class in ru.nsu.pivkin.model">UnfinishedOrder</a> (implements java.io.<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/io/Serializable.html" title="class or interface in java.io" class="external-link">Serializable</a>)</li>
@@ -80,17 +86,9 @@ loadScripts(document, 'script');</script>
 </ul>
 </section>
 <section class="hierarchy">
-<h2 title="Enum Class Hierarchy">Enum Class Hierarchy</h2>
+<h2 title="Interface Hierarchy">Interface Hierarchy</h2>
 <ul>
-<li class="circle">java.lang.<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" class="type-name-link external-link" title="class or interface in java.lang">Object</a>
-<ul>
-<li class="circle">java.lang.<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Enum.html" class="type-name-link external-link" title="class or interface in java.lang">Enum</a>&lt;E&gt; (implements java.lang.<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Comparable.html" title="class or interface in java.lang" class="external-link">Comparable</a>&lt;T&gt;, java.lang.constant.<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/constant/Constable.html" title="class or interface in java.lang.constant" class="external-link">Constable</a>, java.io.<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/io/Serializable.html" title="class or interface in java.io" class="external-link">Serializable</a>)
-<ul>
-<li class="circle">ru.nsu.pivkin.model.<a href="ru/nsu/pivkin/model/OrderStatus.html" class="type-name-link" title="enum class in ru.nsu.pivkin.model">OrderStatus</a></li>
-</ul>
-</li>
-</ul>
-</li>
+<li class="circle">ru.nsu.pivkin.state.<a href="ru/nsu/pivkin/state/OrderState.html" class="type-name-link" title="interface in ru.nsu.pivkin.state">OrderState</a></li>
 </ul>
 </section>
 </main>

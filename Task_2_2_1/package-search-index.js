@@ -1,1 +1,1 @@
-packageSearchIndex = [{"l":"All Packages","u":"allpackages-index.html"},{"l":"ru.nsu.pivkin"},{"l":"ru.nsu.pivkin.config"},{"l":"ru.nsu.pivkin.model"},{"l":"ru.nsu.pivkin.service"},{"l":"ru.nsu.pivkin.thread"}];updateSearchResults();
+packageSearchIndex = [{"l":"All Packages","u":"allpackages-index.html"},{"l":"ru.nsu.pivkin"},{"l":"ru.nsu.pivkin.config"},{"l":"ru.nsu.pivkin.model"},{"l":"ru.nsu.pivkin.service"},{"l":"ru.nsu.pivkin.state"},{"l":"ru.nsu.pivkin.thread"}];updateSearchResults();
