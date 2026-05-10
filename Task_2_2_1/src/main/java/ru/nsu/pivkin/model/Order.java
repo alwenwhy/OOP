@@ -1,43 +1,56 @@
 package ru.nsu.pivkin.model;
 
-import java.util.concurrent.atomic.AtomicInteger;
+import ru.nsu.pivkin.state.OrderState;
 
 /**
- * Модель заказа на пиццу.
+ * Модель заказа на пиццу с поддержкой паттерна State.
  */
 public class Order {
-    private static final AtomicInteger counter = new AtomicInteger(0);
     private final int id;
-    private OrderStatus status;
-    private long startTime;
+    private final long startTime;
+    private OrderState state;
 
     /**
      * Конструктор заказа.
+     *
+     * @param id - идентификатор заказа
+     * @param startTime - время создания заказа
      */
-    public Order() {
-        this.id = counter.incrementAndGet();
-        this.status = OrderStatus.PENDING;
-        this.startTime = System.currentTimeMillis();
+    public Order(int id, long startTime) {
+        this.id = id;
+        this.startTime = startTime;
     }
 
     public int getID() {
         return id;
     }
 
-    public OrderStatus getStatus() {
-        return status;
-    }
-
-    public void setStatus(OrderStatus status) {
-        this.status = status;
-    }
-
     public long getStartTime() {
         return startTime;
     }
 
+    public OrderState getState() {
+        return state;
+    }
+
+    /**
+     * Изменение состояния заказа.
+     *
+     * @param newState - новое состояние
+     */
+    public void setState(OrderState newState) {
+        if (this.state != null) {
+            this.state.onExit(this);
+        }
+        this.state = newState;
+        if (this.state != null) {
+            this.state.onEnter(this);
+        }
+    }
+
     @Override
     public String toString() {
-        return "Order{id=" + id + ", status=" + status + "}";
+        String stateName = state != null ? state.getLogMessage() : "Не определен";
+        return "Order{id=" + id + ", state=" + stateName + "}";
     }
 }

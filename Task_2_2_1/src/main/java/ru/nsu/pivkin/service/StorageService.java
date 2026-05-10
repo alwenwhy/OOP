@@ -60,7 +60,7 @@ public class StorageService {
         while (taken.size() < maxCount && !storage.isEmpty()) {
             Pizza pizza = storage.poll();
             taken.add(pizza);
-            System.out.printf("[Заказ #%d] Забран курьером\n", pizza.getOrderID());
+            System.out.printf("[Заказ #%d] Взят курьером\n", pizza.getOrderID());
         }
 
         notifyAll();

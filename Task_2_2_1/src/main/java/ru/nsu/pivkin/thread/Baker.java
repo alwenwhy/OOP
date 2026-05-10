@@ -1,18 +1,18 @@
 package ru.nsu.pivkin.thread;
 
 import ru.nsu.pivkin.model.Order;
-import ru.nsu.pivkin.model.OrderStatus;
 import ru.nsu.pivkin.model.Pizza;
 import ru.nsu.pivkin.service.StorageService;
+import ru.nsu.pivkin.state.CookingState;
+import ru.nsu.pivkin.state.InStorageState;
 import java.util.Queue;
 
 /**
- * Поток пекаря.
- * Готовит пиццы и передает их на склад.
+ * Поток пекаря. Готовит пиццы и передает их на склад.
  */
 public class Baker implements Runnable {
     private final String name;
-    private final int cookingPeriod;
+    private final int cookingTime;
     private final Queue<Order> orderQueue;
     private final StorageService storage;
     private Order currentOrder;
@@ -22,15 +22,42 @@ public class Baker implements Runnable {
      * Конструктор пекаря.
      *
      * @param name - имя пекаря
-     * @param cookingPeriod - время приготовления в мс
+     * @param cookingTime - время приготовления в мс
      * @param orderQueue - очередь заказов
      * @param storage - склад
      */
-    public Baker(String name, int cookingPeriod, Queue<Order> orderQueue, StorageService storage) {
+    public Baker(String name, int cookingTime, Queue<Order> orderQueue, StorageService storage) {
         this.name = name;
-        this.cookingPeriod = cookingPeriod;
+        this.cookingTime = cookingTime;
         this.orderQueue = orderQueue;
         this.storage = storage;
+    }
+
+    /**
+     * Возвращает текущий заказ пекаря.
+     *
+     * @return - текущий заказ
+     */
+    public Order getCurrentOrder() {
+        return currentOrder;
+    }
+
+    /**
+     * Возвращает имя пекаря.
+     *
+     * @return - имя пекаря
+     */
+    public String getName() {
+        return name;
+    }
+
+    /**
+     * Работает ли пекарь над заказом.
+     *
+     * @return - true если пекарь занят
+     */
+    public boolean isWorking() {
+        return isWorking;
     }
 
     @Override
@@ -56,52 +83,23 @@ public class Baker implements Runnable {
         }
     }
 
-    /**
-     * Возвращает текущий заказ пекаря.
-     */
-    public Order getCurrentOrder() {
-        return currentOrder;
-    }
-
-    /**
-     * Возвращает имя пекаря.
-     */
-    public String getName() {
-        return name;
-    }
-
-    /**
-     * Работает ли пекарь над заказом.
-     */
-    public boolean isWorking() {
-        return isWorking;
-    }
-
-
-    /**
-     * Обрабатывает полный цикл приготовления заказа.
-     *
-     * @param order - заказ, который необходимо приготовить
-     * @throws InterruptedException - если поток пекаря был прерван во время
-     * ожидания (при приготовлении или при попытке положить пиццу на склад)
-     */
     private void processOrder(Order order) {
         isWorking = true;
-        order.setStatus(OrderStatus.COOKING);
+
+        order.setState(new CookingState(name));
         System.out.printf("[Заказ #%d] Начало готовки (%s, %d мс)\n",
-                order.getID(), name, cookingPeriod);
+                order.getID(), name, cookingTime);
 
         try {
-            Thread.sleep(cookingPeriod);
+            Thread.sleep(cookingTime);
         } catch (InterruptedException e) {
             Thread.currentThread().interrupt();
             isWorking = false;
-
             return;
         }
 
-        order.setStatus(OrderStatus.IN_STORAGE);
-        Pizza pizza = new Pizza(order.getID());
+        order.setState(new InStorageState());
+        Pizza pizza = new Pizza(order);
 
         while (!storage.addPizza(pizza) && !Thread.currentThread().isInterrupted()) {
             System.out.printf("[Заказ #%d] Склад полон, ожидание (%s)\n", order.getID(), name);

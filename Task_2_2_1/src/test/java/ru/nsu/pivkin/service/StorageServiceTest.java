@@ -1,6 +1,8 @@
 package ru.nsu.pivkin.service;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import ru.nsu.pivkin.model.Order;
 import ru.nsu.pivkin.model.Pizza;
 import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
@@ -10,36 +12,89 @@ import static org.junit.jupiter.api.Assertions.*;
  */
 class StorageServiceTest {
 
-    @Test
-    void testAddAndTakePizza() {
-        StorageService storage = new StorageService(2);
-        Pizza pizza = new Pizza(1);
+    private StorageService storage;
+    private Order testOrder;
 
-        assertTrue(storage.addPizza(pizza));
-        assertEquals(1, storage.size());
+    @BeforeEach
+    void setUp() {
+        storage = new StorageService(3);
+        testOrder = new Order(1, System.currentTimeMillis());
+    }
 
-        List<Pizza> taken = storage.takePizzas(1);
-        assertEquals(1, taken.size());
-        assertTrue(storage.isEmpty());
+    private Pizza createPizza(int orderId) {
+        Order order = new Order(orderId, System.currentTimeMillis());
+        return new Pizza(order);
     }
 
     @Test
-    void testStorageCapacity() {
-        StorageService storage = new StorageService(2);
+    void testAddPizzaSuccess() {
+        Pizza pizza = new Pizza(testOrder);
+        assertTrue(storage.addPizza(pizza));
+        assertEquals(1, storage.size());
+    }
 
-        assertTrue(storage.addPizza(new Pizza(1)));
-        assertTrue(storage.addPizza(new Pizza(2)));
-        assertFalse(storage.addPizza(new Pizza(3)));
+    @Test
+    void testAddPizzaWhenFull() {
+        storage.addPizza(createPizza(1));
+        storage.addPizza(createPizza(2));
+        storage.addPizza(createPizza(3));
+
+        Pizza pizza4 = createPizza(4);
+        assertFalse(storage.addPizza(pizza4));
+        assertEquals(3, storage.size());
+    }
+
+    @Test
+    void testTakePizzas() {
+        storage.addPizza(createPizza(1));
+        storage.addPizza(createPizza(2));
+
+        List<Pizza> taken = storage.takePizzas(2);
+        assertEquals(2, taken.size());
+        assertTrue(storage.isEmpty());
     }
 
     @Test
     void testTakeMoreThanAvailable() {
-        StorageService storage = new StorageService(5);
-        storage.addPizza(new Pizza(1));
-        storage.addPizza(new Pizza(2));
+        storage.addPizza(createPizza(1));
+        storage.addPizza(createPizza(2));
 
         List<Pizza> taken = storage.takePizzas(5);
         assertEquals(2, taken.size());
         assertTrue(storage.isEmpty());
+    }
+
+    @Test
+    void testAddAndTakeMultipleTimes() {
+        for (int i = 1; i <= 3; i++) {
+            storage.addPizza(createPizza(i));
+        }
+
+        List<Pizza> taken1 = storage.takePizzas(2);
+        assertEquals(2, taken1.size());
+        assertEquals(1, storage.size());
+
+        storage.addPizza(createPizza(4));
+        assertEquals(2, storage.size());
+
+        List<Pizza> taken2 = storage.takePizzas(2);
+        assertEquals(2, taken2.size());
+        assertTrue(storage.isEmpty());
+    }
+
+    @Test
+    void testIsEmpty() {
+        assertTrue(storage.isEmpty());
+        storage.addPizza(new Pizza(testOrder));
+        assertFalse(storage.isEmpty());
+    }
+
+    @Test
+    void testSize() {
+        assertEquals(0, storage.size());
+        storage.addPizza(new Pizza(testOrder));
+        assertEquals(1, storage.size());
+        storage.addPizza(createPizza(2));
+        assertEquals(2, storage.size());
     }
 }

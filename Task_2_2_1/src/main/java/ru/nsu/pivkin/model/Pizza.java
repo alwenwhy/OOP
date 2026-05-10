@@ -4,21 +4,25 @@ package ru.nsu.pivkin.model;
  * Модель готовой пиццы.
  */
 public class Pizza {
-    private final int orderID;
+    private final Order order;
     private final long readyTime;
 
     /**
      * Конструктор пиццы.
      *
-     * @param orderID - идентификатор заказа
+     * @param order заказ, к которому относится пицца
      */
-    public Pizza(int orderID) {
-        this.orderID = orderID;
+    public Pizza(Order order) {
+        this.order = order;
         this.readyTime = System.currentTimeMillis();
     }
 
     public int getOrderID() {
-        return orderID;
+        return order.getID();
+    }
+
+    public Order getOrder() {
+        return order;
     }
 
     public long getReadyTime() {

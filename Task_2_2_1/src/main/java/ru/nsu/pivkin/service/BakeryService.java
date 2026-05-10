@@ -2,12 +2,14 @@ package ru.nsu.pivkin.service;
 
 import ru.nsu.pivkin.config.ConfigLoader;
 import ru.nsu.pivkin.model.Order;
-import ru.nsu.pivkin.model.OrderStatus;
 import ru.nsu.pivkin.model.UnfinishedOrder;
 import ru.nsu.pivkin.thread.Baker;
 import ru.nsu.pivkin.thread.Courier;
 import ru.nsu.pivkin.thread.OrderGenerator;
-import java.io.*;
+
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Queue;
@@ -114,7 +116,7 @@ public class BakeryService {
      * "Закрываем" пиццерию.
      */
     private void pizzeriaShutdown() {
-        System.out.println("=== Остановка приема заказов ===");
+        System.out.println("\n=== Остановка приема заказов ===");
 
         if (generatorThread != null) {
             generatorThread.interrupt();
@@ -198,15 +200,29 @@ public class BakeryService {
         List<UnfinishedOrder> unfinished = new ArrayList<>();
 
         for (Order order : orderQueue) {
-            unfinished.add(new UnfinishedOrder(order.getID(),
-                    order.getStatus(), "В очереди", "Нет"));
+            String stateName = order.getState() != null
+                    ? order.getState().getLogMessage()
+                    : "В очереди";
+            unfinished.add(new UnfinishedOrder(
+                    order.getID(),
+                    stateName,
+                    "В очереди",
+                    "Нет"
+            ));
         }
 
         for (Baker baker : bakers) {
             Order current = baker.getCurrentOrder();
-            if (current != null && current.getStatus() != OrderStatus.COMPLETED) {
-                unfinished.add(new UnfinishedOrder(current.getID(),
-                        current.getStatus(), baker.getName(), "Нет"));
+            if (current != null) {
+                String stateName = current.getState() != null
+                        ? current.getState().getLogMessage()
+                        : "Не определен";
+                unfinished.add(new UnfinishedOrder(
+                        current.getID(),
+                        stateName,
+                        baker.getName(),
+                        "Нет"
+                ));
             }
         }
 
@@ -215,7 +231,7 @@ public class BakeryService {
             oos.writeObject(unfinished);
             System.out.println("Сериализовано " + unfinished.size() + " незавершенных заказов");
 
-            System.out.println("=== Незавершенные заказы ===");
+            System.out.println("\n=== Незавершенные заказы ===");
             for (UnfinishedOrder uo : unfinished) {
                 System.out.println(uo);
             }

@@ -15,9 +15,9 @@ public class Courier implements Runnable {
     /**
      * Конструктор курьера.
      *
-     * @param name имя курьера
-     * @param capacity вместимость багажника
-     * @param storage склад
+     * @param name - имя курьера
+     * @param capacity - вместимость багажника
+     * @param storage - склад
      */
     public Courier(String name, int capacity, StorageService storage) {
         this.name = name;
@@ -44,17 +44,8 @@ public class Courier implements Runnable {
         }
     }
 
-
-    /**
-     * Выполняет доставку одной или нескольких пицц заказчикам.
-     *
-     * @param pizzas - список пицц, которые необходимо доставить.
-     * Каждая пицца содержит идентификатор соответствующего заказа
-     * @throws InterruptedException - если поток курьера был прерван во время
-     * имитации процесса доставки
-     */
     private void deliverPizzas(List<Pizza> pizzas) {
-        int deliveryTime = 2000 + (int)(Math.random() * 2000);
+        int deliveryTime = 2000 + (int) (Math.random() * 2000);
 
         System.out.printf("[Курьер %s] Забрал %d пицц, доставка %d мс\n",
                 name, pizzas.size(), deliveryTime);
@@ -67,7 +58,7 @@ public class Courier implements Runnable {
         }
 
         for (Pizza pizza : pizzas) {
-            System.out.printf("[Заказ #%d] Доставлен счастливому заказчику (курьер %s)\n",
+            System.out.printf("[Заказ #%d] Доставлен (курьер %s)\n",
                     pizza.getOrderID(), name);
         }
     }

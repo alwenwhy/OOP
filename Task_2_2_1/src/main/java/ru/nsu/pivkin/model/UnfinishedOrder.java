@@ -7,16 +7,22 @@ import java.io.Serializable;
  */
 public class UnfinishedOrder implements Serializable {
     private static final long serialVersionUID = 1L;
+
     private final int orderID;
-    private final OrderStatus status;
+    private final String status;
     private final String bakerName;
     private final String courierName;
 
     /**
      * Конструктор незавершенного заказа.
+     *
+     * @param orderID - идентификатор заказа
+     * @param status - статус заказа (строка)
+     * @param bakerName - имя пекаря
+     * @param courierName - имя курьера
      */
-    public UnfinishedOrder(int orderId, OrderStatus status, String bakerName, String courierName) {
-        this.orderID = orderId;
+    public UnfinishedOrder(int orderID, String status, String bakerName, String courierName) {
+        this.orderID = orderID;
         this.status = status;
         this.bakerName = bakerName;
         this.courierName = courierName;
@@ -25,6 +31,6 @@ public class UnfinishedOrder implements Serializable {
     @Override
     public String toString() {
         return String.format("Заказ #%d - Статус: %s, Пекарь: %s, Курьер: %s",
-                orderID, status.getDescription(), bakerName, courierName);
+                orderID, status, bakerName, courierName);
     }
 }
