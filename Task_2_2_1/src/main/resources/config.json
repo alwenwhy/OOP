@@ -1,0 +1,14 @@
+{
+  "bakers": [
+    {"speed": 2000, "name": "Хаха"},
+    {"speed": 1500, "name": "Хехе"},
+    {"speed": 2500, "name": "Хихи"}
+  ],
+  "couriers": [
+    {"capacity": 3, "name": "Жока"},
+    {"capacity": 2, "name": "Бока"}
+  ],
+  "storageCapacity": 5,
+  "workPeriod": 30,
+  "ordersPeriod": 1
+}
