@@ -16,7 +16,7 @@ import java.util.concurrent.TimeUnit;
 import static org.junit.jupiter.api.Assertions.*;
 
 /**
- * Тесты для HEARTBEAT.
+ * Тесты для HEARTBEAT и close().
  */
 class HeartbeatTest {
     private static final int BASE_PORT = 16000;
@@ -82,6 +82,27 @@ class HeartbeatTest {
         }
 
         for (SlaveHandler slave : slaves) {
+            slave.stopSlave();
+        }
+    }
+
+    @Test
+    @Timeout(10)
+    void testCloseDoesNotThrow() throws Exception {
+        List<SlaveHandler> slaves = startCluster(1);
+        SlaveHandler slave = slaves.get(0);
+
+        slave.stopSlave();
+        assertDoesNotThrow(slave::close);
+    }
+
+    @Test
+    @Timeout(10)
+    void testSlaveHandlerUsableAsTryWithResources() throws Exception {
+        List<SlaveHandler> slaves = startCluster(1);
+
+        try (SlaveHandler slave = slaves.get(0)) {
+            assertTrue(slave.sendHeartbeat());
             slave.stopSlave();
         }
     }

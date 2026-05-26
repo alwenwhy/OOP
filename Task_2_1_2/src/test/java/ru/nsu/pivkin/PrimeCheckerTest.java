@@ -7,7 +7,7 @@ import ru.nsu.pivkin.util.PrimeChecker;
 import static org.junit.jupiter.api.Assertions.*;
 
 /**
- * Тесты для утилит
+ * Тесты для утилит.
  */
 class PrimeCheckerTest {
     @Test

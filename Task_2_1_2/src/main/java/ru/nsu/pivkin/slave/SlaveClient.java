@@ -1,9 +1,10 @@
 package ru.nsu.pivkin.slave;
 
-import ru.nsu.pivkin.common.Message;
-import ru.nsu.pivkin.common.MessageType;
+import ru.nsu.pivkin.common.HeartbeatMessage;
 import ru.nsu.pivkin.common.Result;
-import ru.nsu.pivkin.common.Task;
+import ru.nsu.pivkin.common.ResultMessage;
+import ru.nsu.pivkin.common.StopMessage;
+import ru.nsu.pivkin.common.TaskMessage;
 import ru.nsu.pivkin.util.PrimeChecker;
 
 import java.io.ObjectInputStream;
@@ -41,31 +42,26 @@ public class SlaveClient {
             System.out.println("Подключён к мастеру");
 
             while (true) {
-                Message message = (Message) in.readObject();
+                Object message = in.readObject();
 
-                if (message.getType() == MessageType.STOP) {
+                if (message instanceof StopMessage) {
                     System.out.println("Слейв останавливается");
                     break;
                 }
 
-                if (message.getType() == MessageType.HEARTBEAT) {
-                    Message iAmAlive = new Message(MessageType.HEARTBEAT, null);
-                    out.writeObject(iAmAlive);
+                if (message instanceof HeartbeatMessage) {
+                    out.writeObject(new HeartbeatMessage());
                     out.flush();
                 }
 
-                if (message.getType() == MessageType.TASK) {
-                    Task task = (Task) message.getPayload();
-
-                    boolean hasNonPrime = task
+                if (message instanceof TaskMessage taskMessage) {
+                    boolean hasNonPrime = taskMessage.getTask()
                         .getNumbers()
                         .stream()
                         .anyMatch(number -> !PrimeChecker.isPrime(number));
 
-                    Result result = new Result(task.getTaskID(), hasNonPrime);
-                    Message resultMessage = new Message(MessageType.RESULT, result);
-
-                    out.writeObject(resultMessage);
+                    Result result = new Result(taskMessage.getTask().getTaskID(), hasNonPrime);
+                    out.writeObject(new ResultMessage(result));
                     out.flush();
                 }
             }

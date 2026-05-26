@@ -1,18 +1,20 @@
 package ru.nsu.pivkin.master;
 
-import ru.nsu.pivkin.common.Message;
-import ru.nsu.pivkin.common.MessageType;
-import ru.nsu.pivkin.common.Result;
+import ru.nsu.pivkin.common.HeartbeatMessage;
+import ru.nsu.pivkin.common.ResultMessage;
+import ru.nsu.pivkin.common.StopMessage;
 import ru.nsu.pivkin.common.Task;
+import ru.nsu.pivkin.common.TaskMessage;
+import ru.nsu.pivkin.common.Result;
 
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
 
 /**
- * Управление соединения с одним слейвом.
+ * Управляет соединением с одним слейвом.
  */
-public class SlaveHandler {
+public class SlaveHandler implements AutoCloseable {
     private final Socket socket;
     private final ObjectOutputStream out;
     private final ObjectInputStream in;
@@ -37,38 +39,40 @@ public class SlaveHandler {
      * @return - полученный от слейва результат
      */
     public Result sendTask(Task task) throws Exception {
-        Message message = new Message(MessageType.TASK, task);
-
-        out.writeObject(message);
+        out.writeObject(new TaskMessage(task));
         out.flush();
 
-        Message response = (Message) in.readObject();
-        return (Result) response.getPayload();
+        ResultMessage response = (ResultMessage) in.readObject();
+        return response.getResult();
     }
 
     /**
-     * Отправляет слейву сигнал STOP для завершения работы.
+     * Отправляет слейву сигнал StopMessage для завершения работы.
      */
     public void stopSlave() throws Exception {
-        Message stop = new Message(MessageType.STOP, null);
-
-        out.writeObject(stop);
+        out.writeObject(new StopMessage());
         out.flush();
     }
 
     /**
-     * Проверяет доступность слейва: отправляет HEARTBEAT и ждёт HEARTBEAT в ответ.
-     * Если слейв не ответил за таймаут сокета — выбрасывает исключение.
+     * Проверяет доступность слейва: отправляет HeartbeatMessage и ждёт ответа.
+     * Если слейв не ответил за таймаут сокета - выбрасывает исключение.
      *
-     * @return - true, если слейв ответил на HEARTBEAT
+     * @return - true, если слейв ответил на HeartbeatMessage
      */
     public boolean sendHeartbeat() throws Exception {
-        Message areYouAlive = new Message(MessageType.HEARTBEAT, null);
-
-        out.writeObject(areYouAlive);
+        out.writeObject(new HeartbeatMessage());
         out.flush();
 
-        Message response = (Message) in.readObject();
-        return response.getType() == MessageType.HEARTBEAT;
+        Object response = in.readObject();
+        return response instanceof HeartbeatMessage;
+    }
+
+    /**
+     * Закрывает сокет и потоки соединения со слейвом.
+     */
+    @Override
+    public void close() throws Exception {
+        socket.close();
     }
 }
