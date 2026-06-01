@@ -1,0 +1,8 @@
+{
+  "cols": 20,
+  "rows": 20,
+  "foodCount": 3,
+  "winLength": 10,
+  "tickMs": 150,
+  "level": "level1.txt"
+}
