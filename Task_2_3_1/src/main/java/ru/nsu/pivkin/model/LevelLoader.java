@@ -1,6 +1,5 @@
 package ru.nsu.pivkin.model;
 
-import ru.nsu.pivkin.objs.Point;
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;

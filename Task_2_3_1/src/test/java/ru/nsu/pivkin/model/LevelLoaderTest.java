@@ -1,7 +1,7 @@
 package ru.nsu.pivkin.model;
 
 import org.junit.jupiter.api.Test;
-import ru.nsu.pivkin.objs.Point;
+import ru.nsu.pivkin.model.Point;
 
 import java.util.Set;
 

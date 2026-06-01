@@ -1,6 +1,5 @@
-package ru.nsu.pivkin.objs;
+package ru.nsu.pivkin.model;
 
-import ru.nsu.pivkin.enums.Direction;
 import java.util.ArrayDeque;
 import java.util.Deque;
 import java.util.List;

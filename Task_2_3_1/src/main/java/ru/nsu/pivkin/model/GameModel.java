@@ -1,9 +1,5 @@
 package ru.nsu.pivkin.model;
 
-import ru.nsu.pivkin.enums.Direction;
-import ru.nsu.pivkin.enums.GameState;
-import ru.nsu.pivkin.objs.Point;
-import ru.nsu.pivkin.objs.Snake;
 import java.util.HashSet;
 import java.util.Random;
 import java.util.Set;
@@ -160,6 +156,17 @@ public class GameModel {
         return winLength;
     }
 
+    /**
+     * Переключает между PAUSED и RUNNING. Игнорируется после WIN/LOSE.
+     */
+    public void togglePause() {
+        if (state == GameState.RUNNING) {
+            state = GameState.PAUSED;
+        } else if (state == GameState.PAUSED) {
+            state = GameState.RUNNING;
+        }
+    }
+
 
 
     private boolean isOutOfBounds(Point p) {
@@ -184,17 +191,6 @@ public class GameModel {
 
         if (!snake.contains(candidate) && !food.contains(candidate) && !walls.contains(candidate)) {
             food.add(candidate);
-        }
-    }
-
-    /**
-     * Переключает между PAUSED и RUNNING. Игнорируется после WIN/LOSE.
-     */
-    public void togglePause() {
-        if (state == GameState.RUNNING) {
-            state = GameState.PAUSED;
-        } else if (state == GameState.PAUSED) {
-            state = GameState.RUNNING;
         }
     }
 }

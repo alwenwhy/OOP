@@ -1,7 +1,7 @@
 package ru.nsu.pivkin.model;
 
 import org.junit.jupiter.api.Test;
-import ru.nsu.pivkin.enums.Direction;
+import ru.nsu.pivkin.model.Direction;
 
 import static org.junit.jupiter.api.Assertions.*;
 

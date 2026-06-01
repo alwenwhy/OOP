@@ -1,4 +1,4 @@
-package ru.nsu.pivkin.enums;
+package ru.nsu.pivkin.model;
 
 /**
  * Направление движения змейки.
