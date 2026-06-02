@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.canvas.Canvas?>
+<?import javafx.scene.control.Label?>
+
+<BorderPane xmlns:fx="http://javafx.com/fxml"
+            fx:controller="ru.nsu.pivkin.controller.GameController"
+            style="-fx-background-color: black;">
+
+    <center>
+        <StackPane fx:id="canvasContainer">
+            <Canvas fx:id="canvas"/>
+        </StackPane>
+    </center>
+
+    <bottom>
+        <VBox alignment="CENTER" style="-fx-padding: 6; -fx-background-color: black;">
+            <Label fx:id="statusLabel"
+                   text="Используйте стрелки для управления"
+                   style="-fx-text-fill: white; -fx-font-size: 13; -fx-font-family: monospace;"/>
+        </VBox>
+    </bottom>
+
+</BorderPane>
