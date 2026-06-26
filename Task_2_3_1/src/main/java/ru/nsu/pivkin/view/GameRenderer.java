@@ -3,6 +3,7 @@ package ru.nsu.pivkin.view;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
+import ru.nsu.pivkin.model.GameConfig;
 import ru.nsu.pivkin.model.Point;
 
 import java.util.List;
@@ -13,14 +14,17 @@ import java.util.Set;
  */
 public class GameRenderer {
     private final Canvas canvas;
+    private final GameConfig config;
 
     /**
      * Создаёт рендерер, привязанный к заданному canvas.
      *
      * @param canvas - canvas для отрисовки
+     * @param config - конфиг с цветами
      */
-    public GameRenderer(Canvas canvas) {
+    public GameRenderer(Canvas canvas, GameConfig config) {
         this.canvas = canvas;
+        this.config = config;
     }
 
     /**
@@ -38,15 +42,15 @@ public class GameRenderer {
         double cellW = canvas.getWidth() / cols;
         double cellH = canvas.getHeight() / rows;
 
-        gc.setFill(Color.BLACK);
+        gc.setFill(Color.web(config.getColorBackground()));
         gc.fillRect(0, 0, canvas.getWidth(), canvas.getHeight());
 
-        gc.setFill(Color.rgb(214, 156, 47));
+        gc.setFill(Color.web(config.getColorWall()));
         for (Point p : walls) {
             gc.fillRect(p.getX() * cellW, p.getY() * cellH, cellW, cellH);
         }
 
-        gc.setFill(Color.rgb(240, 62, 62));
+        gc.setFill(Color.web(config.getColorFood()));
         for (Point p : food) {
             double m = cellW * 0.1;
             gc.fillOval(p.getX() * cellW + m, p.getY() * cellH + m, cellW - m * 2, cellH - m * 2);
@@ -55,7 +59,7 @@ public class GameRenderer {
         for (int i = 0; i < body.size(); i++) {
             Point p = body.get(i);
             double m = cellW * 0.1;
-            gc.setFill(i == 0 ? Color.rgb(8, 127, 91) : Color.rgb(32, 201, 151));
+            gc.setFill(i == 0 ? Color.web(config.getColorSnakeHead()) : Color.web(config.getColorSnakeBody()));
             gc.fillOval(p.getX() * cellW + m, p.getY() * cellH + m, cellW - m * 2, cellH - m * 2);
         }
     }

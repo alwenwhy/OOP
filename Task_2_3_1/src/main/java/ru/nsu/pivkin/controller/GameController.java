@@ -10,6 +10,7 @@ import ru.nsu.pivkin.model.Direction;
 import ru.nsu.pivkin.model.GameConfig;
 import ru.nsu.pivkin.model.GameModel;
 import ru.nsu.pivkin.model.GameState;
+import ru.nsu.pivkin.GroovyLoader;
 import ru.nsu.pivkin.model.LevelLoader;
 import ru.nsu.pivkin.view.GameView;
 
@@ -28,12 +29,12 @@ public class GameController {
     private long lastTick = 0;
 
     /**
-     * Загружает конфиг, создаёт view и запускает игру.
+     * Загружает конфиг через Groovy DSL, создаёт view и запускает игру.
      */
     @FXML
     public void initialize() {
-        config = GameConfig.load();
-        view = new GameView(canvas, statusLabel, canvasContainer, this::onResize);
+        config = GroovyLoader.load();
+        view = new GameView(canvas, statusLabel, canvasContainer, this::onResize, config);
         startNewGame();
     }
 
@@ -48,7 +49,7 @@ public class GameController {
             config.getRows(),
             config.getFoodCount(),
             config.getWinLength(),
-            LevelLoader.load(config.getLevel())
+            LevelLoader.load(config.getActiveLevelRows())
         );
 
         if (timer != null) {
@@ -60,13 +61,13 @@ public class GameController {
         timer = new AnimationTimer() {
             @Override
             public void handle(long now) {
-            if (model.getState() == GameState.RUNNING && now - lastTick >= tickNs) {
-                model.tick();
-                lastTick = now;
-            }
+                if (model.getState() == GameState.RUNNING && now - lastTick >= tickNs) {
+                    model.tick();
+                    lastTick = now;
+                }
 
-            render();
-            updateStatus();
+                render();
+                updateStatus();
             }
         };
 
@@ -113,13 +114,13 @@ public class GameController {
         String text;
 
         if (model.getState() == GameState.PAUSED) {
-            text = "Пауза - нажмите E для продолжения";
+            text = config.getStatusPaused();
         } else if (model.getState() == GameState.WIN) {
-            text = "Победа! Нажмите R для новой игры";
+            text = config.getStatusWin();
         } else if (model.getState() == GameState.LOSE) {
-            text = "Проигрыш! Нажмите R для новой игры";
+            text = config.getStatusLose();
         } else {
-            text = "Длина: " + model.getSnake().getLength() + " / " + model.getWinLength();
+            text = String.format(config.getStatusRunning(), model.getSnake().getLength(), model.getWinLength());
         }
 
         view.setStatus(text);

@@ -1,8 +1,8 @@
 package ru.nsu.pivkin.model;
 
 import org.junit.jupiter.api.Test;
-import ru.nsu.pivkin.model.Point;
 
+import java.util.List;
 import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -11,31 +11,41 @@ import static org.junit.jupiter.api.Assertions.*;
  * Тесты загрузчика уровней.
  */
 class LevelLoaderTest {
+
     @Test
-    void testLoadDefaultReturnsEmptyWalls() {
-        Set<Point> walls = LevelLoader.load("default.txt");
+    void testLoadEmptyRowsReturnsNoWalls() {
+        Set<Point> walls = LevelLoader.load(List.of());
 
         assertTrue(walls.isEmpty());
     }
 
     @Test
-    void testLoadLevel1HasWalls() {
-        Set<Point> walls = LevelLoader.load("level1.txt");
+    void testLoadDotsOnlyReturnsNoWalls() {
+        Set<Point> walls = LevelLoader.load(List.of("...", "...", "..."));
+
+        assertTrue(walls.isEmpty());
+    }
+
+    @Test
+    void testLoadHashReturnsWall() {
+        Set<Point> walls = LevelLoader.load(List.of("###", "#.#", "###"));
 
         assertFalse(walls.isEmpty());
-    }
-
-    @Test
-    void testLoadLevel1HasTopLeftCorner() {
-        Set<Point> walls = LevelLoader.load("level1.txt");
-
         assertTrue(walls.contains(new Point(0, 0)));
+        assertTrue(walls.contains(new Point(2, 2)));
     }
 
     @Test
-    void testLoadMissingFileReturnsEmpty() {
-        Set<Point> walls = LevelLoader.load("nonexistent.txt");
-        
-        assertTrue(walls.isEmpty());
+    void testLoadDoesNotAddDotAsWall() {
+        Set<Point> walls = LevelLoader.load(List.of("#.#"));
+
+        assertFalse(walls.contains(new Point(1, 0)));
+    }
+
+    @Test
+    void testLoadCountsWallsCorrectly() {
+        Set<Point> walls = LevelLoader.load(List.of("###", "#.#", "###"));
+
+        assertEquals(8, walls.size());
     }
 }

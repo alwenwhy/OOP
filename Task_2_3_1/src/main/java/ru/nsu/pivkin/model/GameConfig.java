@@ -1,8 +1,9 @@
 package ru.nsu.pivkin.model;
 
-import java.io.InputStream;
-import java.nio.charset.StandardCharsets;
-import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * Конфигурация игры.
@@ -10,39 +11,31 @@ import java.util.Scanner;
 public class GameConfig {
     private int cols = 20;
     private int rows = 20;
-    private int foodCount = 3;
-    private int winLength = 10;
+
     private long tickMs = 150;
-    private String level = "default.txt";
+    private int winLength = 10;
 
-    /**
-     * Загружает конфиг из ресурса.
-     *
-     * @return - загруженный конфиг
-     */
-    public static GameConfig load() {
-        GameConfig config = new GameConfig();
+    private int foodCount = 3;
 
-        try (InputStream is = GameConfig.class.getResourceAsStream("/ru/nsu/pivkin/config.json")) {
-            if (is == null) {
-                return config;
-            }
+    private final Map<String, List<String>> levels = new LinkedHashMap<>();
+    private String activeLevel = "default";
 
-            String json = new Scanner(is, StandardCharsets.UTF_8).useDelimiter("\\A").next();
+    private String colorBackground = "#000000";
+    private String colorWall = "#D69C2F";
+    private String colorFood = "#F03E3E";
+    private String colorSnakeHead  = "#08715B";
+    private String colorSnakeBody  = "#20C997";
 
-            config.cols = parseInt(json, "cols", config.cols);
-            config.rows = parseInt(json, "rows", config.rows);
-            config.foodCount = parseInt(json, "foodCount", config.foodCount);
-            config.winLength = parseInt(json, "winLength", config.winLength);
-            config.tickMs = parseInt(json, "tickMs", (int) config.tickMs);
-            config.level = parseString(json, "level", config.level);
+    private String windowTitle = "Змейка";
+    private int windowWidth = 620;
+    private int windowHeight = 660;
+    private int windowMinWidth = 300;
+    private int windowMinHeight = 300;
 
-        } catch (Exception e) {
-            System.err.println("Не удалось загрузить config.json: " + e.getMessage());
-        }
-
-        return config;
-    }
+    private String statusPaused  = "Пауза - нажмите E для продолжения";
+    private String statusWin = "Победа! Нажмите R для новой игры";
+    private String statusLose = "Проигрыш! Нажмите R для новой игры";
+    private String statusRunning = "Длина: %d / %d";
 
     /**
      * Возвращает ширину поля.
@@ -51,6 +44,15 @@ public class GameConfig {
      */
     public int getCols() {
         return cols;
+    }
+
+    /**
+     * Задаёт ширину поля.
+     *
+     * @param cols - количество столбцов
+     */
+    public void setCols(int cols) {
+        this.cols = cols;
     }
 
     /**
@@ -63,21 +65,12 @@ public class GameConfig {
     }
 
     /**
-     * Возвращает количество единиц еды одновременно.
+     * Задаёт высоту поля.
      *
-     * @return - foodCount
+     * @param rows - количество строк
      */
-    public int getFoodCount() {
-        return foodCount;
-    }
-
-    /**
-     * Возвращает длину змейки для победы.
-     *
-     * @return - winLength
-     */
-    public int getWinLength() {
-        return winLength;
+    public void setRows(int rows) {
+        this.rows = rows;
     }
 
     /**
@@ -90,69 +83,289 @@ public class GameConfig {
     }
 
     /**
-     * Возвращает имя файла уровня из папки levels/.
+     * Задаёт длительность тика.
      *
-     * @return - имя файла, например "default.txt"
+     * @param tickMs - миллисекунд на шаг
      */
-    public String getLevel() {
-        return level;
+    public void setTickMs(long tickMs) {
+        this.tickMs = tickMs;
     }
 
-
-
-    private static int parseInt(String json, String key, int fallback) {
-        String pattern = "\"" + key + "\"";
-
-        int idx = json.indexOf(pattern);
-        if (idx < 0) {
-            return fallback;
-        }
-
-        int colon = json.indexOf(':', idx);
-        if (colon < 0) {
-            return fallback;
-        }
-
-        int start = colon + 1;
-        while (start < json.length() && Character.isWhitespace(json.charAt(start))) {
-            start++;
-        }
-
-        StringBuilder sb = new StringBuilder();
-        while (start < json.length() && (Character.isDigit(json.charAt(start)) || json.charAt(start) == '-')) {
-            sb.append(json.charAt(start++));
-        }
-
-        try {
-            return Integer.parseInt(sb.toString());
-        } catch (NumberFormatException e) {
-            return fallback;
-        }
+    /**
+     * Возвращает длину змейки для победы.
+     *
+     * @return - winLength
+     */
+    public int getWinLength() {
+        return winLength;
     }
 
-    private static String parseString(String json, String key, String fallback) {
-        String pattern = "\"" + key + "\"";
+    /**
+     * Задаёт длину змейки для победы.
+     *
+     * @param winLength - длина
+     */
+    public void setWinLength(int winLength) {
+        this.winLength = winLength;
+    }
 
-        int idx = json.indexOf(pattern);
-        if (idx < 0) {
-            return fallback;
-        }
+    /**
+     * Возвращает количество единиц еды одновременно.
+     *
+     * @return - foodCount
+     */
+    public int getFoodCount() {
+        return foodCount;
+    }
 
-        int colon = json.indexOf(':', idx);
-        if (colon < 0) {
-            return fallback;
-        }
+    /**
+     * Задаёт количество единиц еды.
+     *
+     * @param foodCount - количество
+     */
+    public void setFoodCount(int foodCount) {
+        this.foodCount = foodCount;
+    }
 
-        int open = json.indexOf('"', colon + 1);
-        if (open < 0) {
-            return fallback;
-        }
+    /**
+     * Добавляет строку в уровень с заданным именем.
+     *
+     * @param name - имя уровня
+     * @param row - строка карты
+     */
+    public void addLevelRow(String name, String row) {
+        levels.computeIfAbsent(name, k -> new ArrayList<>()).add(row);
+    }
 
-        int close = json.indexOf('"', open + 1);
-        if (close < 0) {
-            return fallback;
-        }
+    /**
+     * Возвращает строки карты активного уровня.
+     *
+     * @return - список строк карты или пустой список
+     */
+    public List<String> getActiveLevelRows() {
+        return levels.getOrDefault(activeLevel, List.of());
+    }
 
-        return json.substring(open + 1, close);
+    /**
+     * Задаёт имя активного уровня.
+     *
+     * @param name - имя уровня из DSL
+     */
+    public void setActiveLevel(String name) {
+        this.activeLevel = name;
+    }
+
+    /**
+     * Возвращает имя активного уровня.
+     *
+     * @return - имя уровня
+     */
+    public String getActiveLevel() {
+        return activeLevel;
+    }
+
+    /**
+     * Возвращает все загруженные уровни.
+     *
+     * @return - map имя -> строки карты
+     */
+    public Map<String, List<String>> getLevels() {
+        return levels;
+    }
+
+    /**
+     * @return - hex-цвет фона
+     */
+    public String getColorBackground() {
+        return colorBackground;
+    }
+
+    /**
+     * @param v - hex-цвет фона
+     */
+    public void setColorBackground(String v) {
+        colorBackground = v;
+    }
+
+    /**
+     * @return - hex-цвет стены
+     */
+    public String getColorWall() {
+        return colorWall;
+    }
+
+    /**
+     * @param v - hex-цвет стены
+     */
+    public void setColorWall(String v) {
+        colorWall = v;
+    }
+
+    /**
+     * @return - hex-цвет еды
+     */
+    public String getColorFood() {
+        return colorFood;
+    }
+
+    /**
+     * @param v - hex-цвет еды
+     */
+    public void setColorFood(String v) {
+        colorFood = v;
+    }
+
+    /**
+     * @return - hex-цвет головы змейки
+     */
+    public String getColorSnakeHead() {
+        return colorSnakeHead;
+    }
+
+    /**
+     * @param v - hex-цвет головы
+     */
+    public void setColorSnakeHead(String v) {
+        colorSnakeHead = v;
+    }
+
+    /**
+     * @return - hex-цвет тела змейки
+     */
+    public String getColorSnakeBody() {
+        return colorSnakeBody;
+    }
+
+    /**
+     * @param v - hex-цвет тела
+     */
+    public void setColorSnakeBody(String v) {
+        colorSnakeBody = v;
+    }
+
+    /**
+     * @return - заголовок окна
+     */
+    public String getWindowTitle() {
+        return windowTitle;
+    }
+
+    /**
+     * @param v - заголовок окна
+     */
+    public void setWindowTitle(String v) {
+        windowTitle = v;
+    }
+
+    /**
+     * @return - начальная ширина окна
+     */
+    public int getWindowWidth() {
+        return windowWidth;
+    }
+
+    /**
+     * @param v - ширина
+     */
+    public void setWindowWidth(int v) {
+        windowWidth = v;
+    }
+
+    /**
+     * @return - начальная высота окна
+     */
+    public int getWindowHeight() {
+        return windowHeight;
+    }
+
+    /**
+     * @param v - высота
+     */
+    public void setWindowHeight(int v) {
+        windowHeight = v;
+    }
+
+    /**
+     * @return - минимальная ширина окна
+     */
+    public int getWindowMinWidth() {
+        return windowMinWidth;
+    }
+
+    /**
+     * @param v - мин. ширина
+     */
+    public void setWindowMinWidth(int v) {
+        windowMinWidth = v;
+    }
+
+    /**
+     * @return - минимальная высота окна
+     */
+    public int getWindowMinHeight() {
+        return windowMinHeight;
+    }
+
+    /**
+     * @param v - мин. высота
+     */
+    public void setWindowMinHeight(int v) {
+        windowMinHeight = v;
+    }
+
+    /**
+     * @return - текст паузы
+     */
+    public String getStatusPaused() {
+        return statusPaused;
+    }
+
+    /**
+     * @param v - текст паузы
+     */
+    public void setStatusPaused(String v) {
+        statusPaused = v;
+    }
+
+    /**
+     * @return - текст победы
+     */
+    public String getStatusWin() {
+        return statusWin;
+    }
+
+    /**
+     * @param v - текст победы
+     */
+    public void setStatusWin(String v) {
+        statusWin = v;
+    }
+
+    /**
+     * @return - текст поражения
+     */
+    public String getStatusLose() {
+        return statusLose;
+    }
+
+    /**
+     * @param v - текст поражения
+     */
+    public void setStatusLose(String v) {
+        statusLose = v;
+    }
+
+    /**
+     * @return - шаблон текста во время игры (%d %d - длина и цель)
+     */
+    public String getStatusRunning() {
+        return statusRunning;
+    }
+
+    /**
+     * @param v - шаблон
+     */
+    public void setStatusRunning(String v) {
+        statusRunning = v;
     }
 }

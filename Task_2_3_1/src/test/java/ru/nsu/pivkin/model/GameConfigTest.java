@@ -8,38 +8,39 @@ import static org.junit.jupiter.api.Assertions.*;
  * Тесты конфига.
  */
 class GameConfigTest {
-    @Test
-    void testLoadReturnsNonNull() {
-        assertNotNull(GameConfig.load());
-    }
 
     @Test
     void testDefaultColsPositive() {
-        assertTrue(GameConfig.load().getCols() > 0);
+        assertTrue(new GameConfig().getCols() > 0);
     }
 
     @Test
     void testDefaultRowsPositive() {
-        assertTrue(GameConfig.load().getRows() > 0);
+        assertTrue(new GameConfig().getRows() > 0);
     }
 
     @Test
     void testDefaultFoodCountNonNegative() {
-        assertTrue(GameConfig.load().getFoodCount() >= 0);
+        assertTrue(new GameConfig().getFoodCount() >= 0);
     }
 
     @Test
     void testDefaultWinLengthPositive() {
-        assertTrue(GameConfig.load().getWinLength() > 0);
+        assertTrue(new GameConfig().getWinLength() > 0);
     }
 
     @Test
     void testDefaultTickMsPositive() {
-        assertTrue(GameConfig.load().getTickMs() > 0);
+        assertTrue(new GameConfig().getTickMs() > 0);
     }
 
     @Test
-    void testDefaultLevelNotEmpty() {
-        assertFalse(GameConfig.load().getLevel().isEmpty());
+    void testDefaultActiveLevelNotEmpty() {
+        assertFalse(new GameConfig().getActiveLevel().isEmpty());
+    }
+
+    @Test
+    void testDefaultActiveLevelRowsEmptyBeforeLoading() {
+        assertTrue(new GameConfig().getActiveLevelRows().isEmpty());
     }
 }

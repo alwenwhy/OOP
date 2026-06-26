@@ -3,6 +3,7 @@ package ru.nsu.pivkin.view;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.control.Label;
 import javafx.scene.layout.StackPane;
+import ru.nsu.pivkin.model.GameConfig;
 
 /**
  * Обёртка над FXML-узлами.
@@ -19,9 +20,10 @@ public class GameView {
      * @param statusLabel - метка статуса внизу окна
      * @param container - контейнер canvas (для отслеживания ресайза)
      * @param onResize - callback, вызываемый при изменении размера контейнера
+     * @param config - конфиг с цветами
      */
-    public GameView(Canvas canvas, Label statusLabel, StackPane container, Runnable onResize) {
-        this.renderer = new GameRenderer(canvas);
+    public GameView(Canvas canvas, Label statusLabel, StackPane container, Runnable onResize, GameConfig config) {
+        this.renderer = new GameRenderer(canvas, config);
         this.statusLabel = statusLabel;
         this.container = container;
 
