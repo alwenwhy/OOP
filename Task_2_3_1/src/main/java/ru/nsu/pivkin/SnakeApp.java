@@ -5,11 +5,13 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import ru.nsu.pivkin.controller.GameController;
+import ru.nsu.pivkin.model.GameConfig;
 
 /**
  * Точка входа.
  */
 public class SnakeApp extends Application {
+
     /**
      * Запуск приложения.
      *
@@ -21,20 +23,22 @@ public class SnakeApp extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
+        GameConfig config = GroovyLoader.load();
+
         FXMLLoader loader = new FXMLLoader(
             getClass().getResource("/ru/nsu/pivkin/game.fxml")
         );
 
-        Scene scene = new Scene(loader.load(), 620, 660);
+        Scene scene = new Scene(loader.load(), config.getWindowWidth(), config.getWindowHeight());
 
         GameController controller = loader.getController();
         scene.setOnKeyPressed(controller::handleKey);
 
-        stage.setTitle("Змейка");
+        stage.setTitle(config.getWindowTitle());
         stage.setScene(scene);
         stage.setResizable(true);
-        stage.setMinWidth(300);
-        stage.setMinHeight(300);
+        stage.setMinWidth(config.getWindowMinWidth());
+        stage.setMinHeight(config.getWindowMinHeight());
 
         stage.show();
     }

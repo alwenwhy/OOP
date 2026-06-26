@@ -2,6 +2,7 @@ package ru.nsu.pivkin.model;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
+import ru.nsu.pivkin.GroovyLoader;
 
 import java.io.File;
 import java.io.FileWriter;

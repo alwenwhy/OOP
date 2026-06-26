@@ -1,8 +1,9 @@
-package ru.nsu.pivkin.model;
+package ru.nsu.pivkin;
 
 import groovy.lang.Closure;
 import groovy.lang.GroovyShell;
 import groovy.lang.Script;
+import ru.nsu.pivkin.model.GameConfig;
 
 import java.io.File;
 import java.util.List;
